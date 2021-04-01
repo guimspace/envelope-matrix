@@ -1,4 +1,4 @@
-function [diag env env_col env_lin] = col_envelope (A)
+function [diag, env, env_col, env_lin] = col_envelope (A)
     diag = diag(A);
     env = [];
     env_lin = [];
