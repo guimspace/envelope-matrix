@@ -24,3 +24,14 @@ A = [
     0   0   0   0   0   66
 ];
 [diagg, env, env_col, env_lin] = col_envelope(A)
+
+
+A = [
+    11  12  13  14  15  16;
+    0   22  0   0   0   0;
+    0   0   33  0   0   0;
+    0   0   0   44  0   0;
+    0   0   0   0   55  0;
+    0   0   0   0   0   66
+];
+[diagg, env, env_col, env_lin] = col_envelope(A)
