@@ -1,3 +1,5 @@
+addpath("../src");
+
 A = eye(6);
 [diag env env_col env_lin] = envelope_matrix(A)
 
