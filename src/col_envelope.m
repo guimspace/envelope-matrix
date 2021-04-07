@@ -18,8 +18,8 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-function [diag, env, env_col, env_lin] = col_envelope (A)
-    diag = diag(A);
+function [diagg, env, env_col, env_lin] = col_envelope (A)
+    diagg = diag(A);
     env = [];
     env_lin = [];
     env_col = [1];
