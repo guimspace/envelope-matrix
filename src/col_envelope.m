@@ -30,14 +30,14 @@ function [diagg, env, env_col, env_lin] = col_envelope (A)
         i = 1;
         while (i < j && A(i, j) == 0)
             i = i + 1;
-        endwhile
+        end
 
         s = 1 + size(env)(2);
         env_col = [env_col s];
 
         if (i == j)
             continue
-        endif
+        end
 
         next = A(i:(j-1), j);
         next = transpose(next);
@@ -52,4 +52,4 @@ function [diagg, env, env_col, env_lin] = col_envelope (A)
 
     s = size(env)(2);
     env_col = [env_col s];
-endfunction
+end
