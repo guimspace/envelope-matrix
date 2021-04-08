@@ -1,4 +1,4 @@
-addpath("../src");
+addpath('../src');
 
 A = eye(6);
 [diagg, env, env_col, env_lin] = col_envelope(A)
