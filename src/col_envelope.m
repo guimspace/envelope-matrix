@@ -28,6 +28,7 @@ function [diagg, env, env_col, env_lin] = col_envelope (A)
 
     for j = 2:1:n
         i = 1;
+        % search by row first non-zero
         while (i < j && A(i, j) == 0)
             i = i + 1;
         end
@@ -35,19 +36,21 @@ function [diagg, env, env_col, env_lin] = col_envelope (A)
         s = 1 + size(env)(2);
         env_col = [env_col s];
 
+        % if column is zero up to diagonal, skip to next
         if (i == j)
             continue
         end
 
+        % get envelope elements
         next = A(i:(j-1), j);
         next = transpose(next);
         env = [env next];
 
+        % line number of elements
         env_lin = [env_lin i:(j-1)];
     end
 
     env = [env 0];
-
     env_lin = [env_lin 0];
 
     s = size(env)(2);
