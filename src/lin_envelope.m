@@ -43,7 +43,6 @@ function [diagg, env, env_lin, env_col] = lin_envelope (A)
 
         % get envelope elements
         next = A(i, j:(i - 1));
-        next = transpose(next);
         env = [env next];
 
         % column number of elements
