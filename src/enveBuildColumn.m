@@ -19,7 +19,7 @@
 %	SOFTWARE.
 
 function [diagg, enve, enveCol, enveLin] = enveBuildColumn (A)
-    diagg = diag(A);
+    diagg = diag(A)';
     enve = [];
     enveLin = [];
     enveCol = [1];

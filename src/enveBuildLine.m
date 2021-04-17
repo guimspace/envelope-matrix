@@ -19,7 +19,7 @@
 %	SOFTWARE.
 
 function [diagg, enve, enveLin, enveCol] = enveBuildLine (A)
-    diagg = diag(A);
+    diagg = diag(A)';
     enve = [];
     enveCol = [];
     enveLin = [1];
