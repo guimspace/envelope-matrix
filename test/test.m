@@ -2,7 +2,6 @@ addpath('../src');
 
 A = eye(6);
 [diagg, enve, enveCol, enveLin] = envelopeBuild(A)
-[diagg, enve, enveLin, enveCol] = envelopeBuild(A')
 
 
 A = [
