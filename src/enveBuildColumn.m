@@ -44,7 +44,7 @@ function [diagg, enve, enveCol, enveLin] = enveBuildColumn (A)
         % get envelope elements
         next = A(i:(j-1), j);
         next = transpose(next);
-        env = [enve next];
+        enve = [enve next];
 
         % line number of elements
         enveLin = [enveLin i:(j-1)];
