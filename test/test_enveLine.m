@@ -1,8 +1,5 @@
 addpath('../src');
 
-A = eye(6);
-[diagg, enve, enveCol, enveLin] = envelopeBuild(A)
-
 
 A = [
     11  12  0   14  0   0;
@@ -12,7 +9,6 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = envelopeBuild(A)
 [diagg, enve, enveLin, enveCol] = envelopeBuild(A')
 
 
@@ -24,9 +20,7 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = envelopeBuild(A)
 [diagg, enve, enveLin, enveCol] = envelopeBuild(A')
-
 
 
 A = [
@@ -37,7 +31,6 @@ A = [
     0   0   0   0   55  56;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = envelopeBuild(A)
 [diagg, enve, enveLin, enveCol] = envelopeBuild(A')
 
 
@@ -49,5 +42,4 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = envelopeBuild(A)
 [diagg, enve, enveLin, enveCol] = envelopeBuild(A')
