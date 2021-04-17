@@ -44,7 +44,7 @@ while (p < n)
     A = listA{p};
     dim = size(A);
 
-    [diagg, enve, enveCol, enveLin] = col_envelope(A);
+    [diagg, enve, enveCol, enveLin] = envelopeBuild(A);
     envelope = {diagg, enve, enveCol, enveLin};
 
     for j = 1:1:dim(2)

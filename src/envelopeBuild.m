@@ -18,40 +18,41 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-function [diagg, enve, enveLin, enveCol] = enveBuildLine (A)
+function [diagg, enve, enveCol, enveLin] = envelopeBuild (A)
     diagg = diag(A)';
     enve = [];
-    enveCol = [];
-    enveLin = [1];
+    enveLin = [];
+    enveCol = [1];
 
-    n = size(A)(1);
+    n = size(A)(2);
 
-    for i = 2:1:n
-        j = 1;
-        % search by column first non-zero
-        while (j < i && A(i, j) == 0)
-            j = j + 1;
+    for j = 2:1:n
+        i = 1;
+        % search by row first non-zero
+        while (i < j && A(i, j) == 0)
+            i = i + 1;
         end
 
         s = 1 + size(enve)(2);
-        enveLin = [enveLin s];
+        enveCol = [enveCol s];
 
-        % if line is zero up to diagonal, skip to next
-        if (j == i)
+        % if column is zero up to diagonal, skip to next
+        if (i == j)
             continue
         end
 
         % get envelope elements
-        next = A(i, j:(i - 1));
+        next = A(i:(j-1), j);
+        next = transpose(next);
         enve = [enve next];
 
-        % column number of elements
-        enveCol = [enveCol j:(i - 1)];
+        % line number of elements
+        enveLin = [enveLin i:(j-1)];
     end
 
-    enve= [enve 0];
-    enveCol = [enveCol 0];
+    enve = [enve 0];
+    enveLin = [enveLin 0];
 
     s = size(enve)(2);
-    enveLin = [enveLin s];
+    enveCol = [enveCol s];
 end
