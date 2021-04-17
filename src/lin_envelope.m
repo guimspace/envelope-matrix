@@ -18,11 +18,11 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-function [diagg, env, env_lin, env_col] = lin_envelope (A)
+function [diagg, enve, enveLin, enveCol] = lin_envelope (A)
     diagg = diag(A);
-    env = [];
-    env_col = [];
-    env_lin = [1];
+    enve = [];
+    enveCol = [];
+    enveLin = [1];
 
     n = size(A)(1);
 
@@ -33,8 +33,8 @@ function [diagg, env, env_lin, env_col] = lin_envelope (A)
             j = j + 1;
         end
 
-        s = 1 + size(env)(2);
-        env_lin = [env_lin s];
+        s = 1 + size(enve)(2);
+        enveLin = [enveLin s];
 
         % if line is zero up to diagonal, skip to next
         if (j == i)
@@ -43,15 +43,15 @@ function [diagg, env, env_lin, env_col] = lin_envelope (A)
 
         % get envelope elements
         next = A(i, j:(i - 1));
-        env = [env next];
+        enve = [enve next];
 
         % column number of elements
-        env_col = [env_col j:(i - 1)];
+        enveCol = [enveCol j:(i - 1)];
     end
 
-    env = [env 0];
-    env_col = [env_col 0];
+    enve= [enve 0];
+    enveCol = [enveCol 0];
 
-    s = size(env)(2);
-    env_lin = [env_lin s];
+    s = size(enve)(2);
+    enveLin = [enveLin s];
 end
