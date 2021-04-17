@@ -49,7 +49,7 @@ while (p < n)
 
     for j = 1:1:dim(2)
         for i = 1:1:j
-            if (A(i, j) ~= enveRead(i, j, envelope))
+            if (A(i, j) ~= enveRead(i, j, envelope, false))
                 warning('Mismatching value at (%d, %d).', i, j);
                 return;
             end
