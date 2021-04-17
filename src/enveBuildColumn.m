@@ -18,7 +18,7 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-function [diagg, enve, enveCol, enveLin] = col_envelope (A)
+function [diagg, enve, enveCol, enveLin] = enveBuildColumn (A)
     diagg = diag(A);
     enve = [];
     enveLin = [];

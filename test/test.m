@@ -1,8 +1,8 @@
 addpath('../src');
 
 A = eye(6);
-[diagg, enve, enveCol, enveLin] = col_envelope(A)
-[diagg, enve, enveLin, enveCol] = lin_envelope(A')
+[diagg, enve, enveCol, enveLin] = enveBuildColumn(A)
+[diagg, enve, enveLin, enveCol] = enveBuildLine(A')
 
 
 A = [
@@ -13,8 +13,8 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = col_envelope(A)
-[diagg, enve, enveLin, enveCol] = lin_envelope(A')
+[diagg, enve, enveCol, enveLin] = enveBuildColumn(A)
+[diagg, enve, enveLin, enveCol] = enveBuildLine(A')
 
 
 A = [
@@ -25,8 +25,8 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = col_envelope(A)
-[diagg, enve, enveLin, enveCol] = lin_envelope(A')
+[diagg, enve, enveCol, enveLin] = enveBuildColumn(A)
+[diagg, enve, enveLin, enveCol] = enveBuildLine(A')
 
 
 
@@ -38,8 +38,8 @@ A = [
     0   0   0   0   55  56;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = col_envelope(A)
-[diagg, enve, enveLin, enveCol] = lin_envelope(A')
+[diagg, enve, enveCol, enveLin] = enveBuildColumn(A)
+[diagg, enve, enveLin, enveCol] = enveBuildLine(A')
 
 
 A = [
@@ -50,5 +50,5 @@ A = [
     0   0   0   0   55  0;
     0   0   0   0   0   66
 ];
-[diagg, enve, enveCol, enveLin] = col_envelope(A)
-[diagg, enve, enveLin, enveCol] = lin_envelope(A')
+[diagg, enve, enveCol, enveLin] = enveBuildColumn(A)
+[diagg, enve, enveLin, enveCol] = enveBuildLine(A')
