@@ -6,7 +6,7 @@ n = size(matrices)(1);
 
 while (p < n)
     A = matrices{p};
-    [diagg, enve, enveCol, enveLin] = envelopeBuild(A)
+    envelopeBuild(A)
 
     p = p + 1;
 end

@@ -8,8 +8,7 @@ while (p < n)
     A = matrices{p};
     dim = size(A);
 
-    [diagg, enve, enveCol, enveLin] = envelopeBuild(A);
-    envelope = {diagg, enve, enveCol, enveLin};
+    envelope = envelopeBuild(A);
 
     for j = 1:1:dim(2)
         for i = 1:1:j
