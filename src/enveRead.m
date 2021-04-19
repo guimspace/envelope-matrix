@@ -19,13 +19,7 @@
 %	SOFTWARE.
 
 
-function a = enveRead (indL, indC, envelope, isByLine)
-    if isByLine
-        tmp = indL;
-        indL = indC;
-        indC = tmp;
-    end
-
+function a = enveRead (indL, indC, envelope)
     diagg = envelope{1};
     enve = envelope{2};
     enveCol = envelope{3};
