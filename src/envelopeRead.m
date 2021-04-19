@@ -19,7 +19,7 @@
 %	SOFTWARE.
 
 
-function a = enveRead (indL, indC, envelope)
+function a = envelopeRead (indL, indC, envelope)
     diagg = envelope{1};
     enve = envelope{2};
     enveCol = envelope{3};
