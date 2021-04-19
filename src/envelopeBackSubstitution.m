@@ -18,7 +18,7 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-function x = envelopeSubstitution (envelope, b)
+function x = envelopeBackSubstitution (envelope, b)
     diagg = envelope{1};
     enve = envelope{2};
     enveCol = envelope{3};
