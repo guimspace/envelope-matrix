@@ -22,24 +22,21 @@ function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
     summ = 0;
 
     posL = enveTriL{3}(indI);
-    if (posL == enveTriL{3}(indI + 1))
-        return
-    end
+    nL = enveTriL{3}(indI + 1);
 
     posU = enveTriU{3}(indJ);
-    if (posU == enveTriU{3}(indJ + 1))
-        return
-    end
+    nU = enveTriU{3}(indJ + 1);
 
     if (enveTriL{4}(posL) >= enveTriU{4}(posU))
-        init = enveTriL{4}(posL);
+        posU = posU + (enveTriL{4}(posL) - enveTriU{4}(posU));
     else
-        init = enveTriU{4}(posU);
+        posL = posL + (enveTriU{4}(posU) - enveTriL{4}(posL));
     end
 
-    i = 0;
-    for k = init:(indI - 1)
-        summ = summ + enveTriL{2}(posL + i) * enveTriU{2}(posU + i);
-        i = i + 1;
+    while (posL < nL && posU < nU)
+        summ = summ + enveTriL{2}(posL) * enveTriU{2}(posU);
+
+        posL = posL + 1;
+        posU = posU + 1;
     end
 end
