@@ -50,8 +50,8 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
 
         for j = (i + 1):n
             pos = enveTriU{3}(j);
-            offset = i - enveTriU{4}(pos);
-            if (offset >= 0)
+            if (pos ~= enveTriU{3}(j + 1))
+                offset = i - enveTriU{4}(pos);
                 pos = pos + offset;
 
                 summ = sumLkiUkj(enveTriL, i, enveTriU, j);
@@ -59,8 +59,8 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
             end
 
             pos = enveTriL{3}(j);
-            offset = i - enveTriL{4}(pos);
-            if (offset >= 0)
+            if (pos ~= enveTriL{3}(j + 1))
+                offset = i - enveTriL{4}(pos);
                 pos = pos + offset;
 
                 summ = sumLkiUkj(enveTriU, i, enveTriL, j);
