@@ -30,7 +30,7 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
     u_ii = enveTriU{1}(1);
     for j = 2:n
         pos = enveTriL{3}(j);
-        if enveTriL{4}(pos) ~= 1
+        if (pos == enveTriL{3}(j + 1) || enveTriL{4}(pos) ~= 1)
             continue
         end
 
