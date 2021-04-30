@@ -34,17 +34,17 @@ Array | Description
     ]
     
     DIAG = [11   22   33   44   55   66];
-    ENV = [12   23   14    0    0   46    0    0];
+    ENV = [12   23   14    0    0   46    0    null];
     ENVcol = [1   1   2   3   6   6   8];
-    ENVlin = [1   2   1   2   3   4   5   0];
+    ENVlin = [1   2   1   2   3   4   5   null];
 
 To retrieve an element _a\_ij_ from an envelope:
 1. If **i == j**, return **DIAG(i)**.
 2. Get **pos = ENVcol(j)**.
-3. If **pos == **ENVcol(j + 1)**, then the _j_ th column is empty: return 0.
+3. If **pos == ENVcol(j + 1)**, then the _j_ th column is empty: return 0.
 4. If **ENVlin(pos) > i**, then the column has 0's up to the **ENVlin(pos)** th line.
 5. Get **pos = pos + i - ENVlin(pos)**.
-6. Return **a_ij = ENV(pos)**.
+6. Return **ENV(pos)**.
 
 
 ## Contribute code and ideas
