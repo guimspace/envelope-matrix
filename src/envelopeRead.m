@@ -18,7 +18,14 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
-
+%%
+ % Returns the element a_ij from A.
+ %
+ % @param   {Scalar}        indL        The index of the line.
+ % @param   {Scalar}        indC        The index of the column.
+ % @param   {Cell array}    envelope    The envelope of the matrix.
+ % @return  {Scalar}        a           The matrix element a_ij.
+ %%
 function a = envelopeRead (indL, indC, envelope)
     diagg = envelope{1};
     enve = envelope{2};

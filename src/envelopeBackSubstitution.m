@@ -18,6 +18,13 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
+%%
+ % Solves the linear system Ux = b by backward substitution.
+ %
+ % @param   {Cell array}    envelope    The envelope of U.
+ % @param   {Array}         b           The vector b.
+ % @return  {Array}         x           The solution of the system.
+ %%
 function x = envelopeBackSubstitution (envelope, b)
     diagg = envelope{1};
     enve = envelope{2};

@@ -18,6 +18,15 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
+%%
+ % Sum the product of elements from two matrices.
+ %
+ % @param   {Cell array}    enveTriL    The envelope by line of A.
+ % @param   {Scalar}        indI        The selected line of A.
+ % @param   {Cell array}    enveTriU    The envelope by column of A.
+ % @param   {Scalar}        indJ        The selected column of A.
+ % @return  {Scalar}        summ        The sum of products.
+ %%
 function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
     summ = 0;
 

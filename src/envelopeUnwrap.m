@@ -18,6 +18,12 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
+%%
+ % Unwraps the envelope of a matrix.
+ %
+ % @param   {Cell array}    envelope    The envelope of the matrix.
+ % @return  {Matrix}        A           The matrix.
+ %%
 function A = envelopeUnwrap (envelope)
     diagg = envelope{1};
     enve = envelope{2};

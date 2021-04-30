@@ -18,6 +18,14 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
+%%
+ % Decompose a matrix A in LU.
+ %
+ % @param   {Cell array}    enveTriL   The envelope by line of A.
+ % @param   {Cell array}    enveTriU   The envelope by column of A.
+ % @return  {Cell array}    enveTriL   The envelope by line of L.
+ % @return  {Cell array}    enveTriU   The envelope by column of U.
+ %%
 function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
     if (enveTriU{1}(1) == 0)
         error('Factorization impossible');

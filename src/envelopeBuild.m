@@ -18,6 +18,13 @@
 %	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %	SOFTWARE.
 
+%%
+ % Generates the envelope (by column) of a square matrix.
+ % The envelope by line can be generated from the transposed matrix.
+ %
+ % @param   {Matrix}        A          The matrix.
+ % @return  {Cell array}    envelope   The envelope in a cell array.
+ %%
 function envelope = envelopeBuild (A)
     diagg = diag(A)';
     enve = [];
