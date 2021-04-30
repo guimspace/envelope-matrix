@@ -24,19 +24,19 @@
  % @param   {Scalar}        indL        The index of the line.
  % @param   {Scalar}        indC        The index of the column.
  % @param   {Cell array}    envelope    The envelope of the matrix.
- % @return  {Scalar}        a           The matrix element a_ij.
+ % @return  {Scalar}        a_ij        The matrix element a_ij.
  %%
-function a = envelopeRead (indL, indC, envelope)
+function a_ij = envelopeRead (indL, indC, envelope)
     diagg = envelope{1};
     enve = envelope{2};
     enveCol = envelope{3};
     enveLin = envelope{4};
 
     if (indL == indC)
-        a = diagg(indL);
+        a_ij = diagg(indL);
         return;
     elseif (enveCol(indC) == enveCol(indC + 1))
-        a = 0;
+        a_ij = 0;
         return;
     end
 
@@ -44,11 +44,11 @@ function a = envelopeRead (indL, indC, envelope)
     i = enveLin(pos);
 
     if (i > indL)
-        a = 0;
+        a_ij = 0;
         return;
     end
 
     pos = pos + (indL - i);
 
-    a = enve(pos);
+    a_ij = enve(pos);
 end
