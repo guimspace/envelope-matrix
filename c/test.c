@@ -15,6 +15,16 @@ int main(int argc, char **argv)
 
         print_envelope(envelope);
 
+        float *matrix2 = unwrap_envelope(envelope);
+
+        int l = (int)matrix2[0];
+        int n = l * l;
+        for (int i = 1; i <= n; ) {
+                printf("%.2f\t", matrix2[i]);
+                if (i++ % l == 0)
+                        printf("\n");
+        }
+
         end_envelope(envelope);
 
 	return 0;
