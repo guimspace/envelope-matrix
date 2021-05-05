@@ -22,6 +22,36 @@
 
 #include "envelope-tools.h"
 
+float *solve_forward_substitution(env envelope, float vecB[])
+{
+        float *diagg = envelope->diagg;
+        float *enve = envelope->enve;
+        int *enveCol = envelope->enveCol;
+        int *enveLin = envelope->enveLin;
+
+        int n = envelope->n;
+        float *solX = (float *)calloc(n, sizeof(float));
+
+        int limit, l, p, j;
+
+        j = 0;
+        while (j < n) {
+                p = enveCol[j];
+                limit = enveCol[j + 1];
+                while (p < limit) {
+                        l = enveLin[p];
+                        vecB[j] -= enve[p] * solX[j];
+                        p++;
+                }
+
+                solX[j] = vecB[j] / diagg[j];
+
+                j++;
+        }
+
+        return solX;
+}
+
 float *solve_back_substitution(env envelope, float vecB[])
 {
         float *diagg = envelope->diagg;

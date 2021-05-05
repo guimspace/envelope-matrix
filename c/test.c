@@ -65,6 +65,15 @@ int main(int argc, char **argv)
 
         for (i = 0; i < 4; i++)
                 printf("%.2f\n", solX[i]);
+        free(solX);
+        printf("\n");
+
+        solX = solve_forward_substitution(envelope, vecB);
+
+        for (i = 0; i < 4; i++)
+                printf("%.2f\n", solX[i]);
+        free(solX);
+        end_envelope(envelope);
 
 	return 0;
 }
