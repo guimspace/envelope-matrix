@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "envelope-tools.h"
-#include "envelope-wrap.h"
-#include "envelope-solve.h"
+#include "tools.h"
+#include "wrap.h"
+#include "solve.h"
 
 int main(int argc, char **argv)
 {

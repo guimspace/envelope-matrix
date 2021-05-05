@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-#include "envelope-tools.h"
+#include "tools.h"
+#include "wrap.h"
 
-float *solve_forward_substitution(env envelope, float vecB[])
+float *unwrap_envelope(env envelope)
 {
         float *diagg = envelope->diagg;
         float *enve = envelope->enve;
@@ -30,54 +31,82 @@ float *solve_forward_substitution(env envelope, float vecB[])
         int *enveLin = envelope->enveLin;
 
         int n = envelope->n;
-        float *solX = (float *)calloc(n, sizeof(float));
 
-        int limit, l, p, j;
+        float *matrix = (float*)calloc(1 + n * n, sizeof(float));
+        matrix[0] = n;
+        matrix += 1;
+
+        int limit, p;
+        int i, j;
+
+        p = enveCol[0];
+        limit = enveCol[1];
 
         j = 0;
         while (j < n) {
-                p = enveCol[j];
-                limit = enveCol[j + 1];
-                while (p < limit) {
-                        l = enveLin[p];
-                        vecB[j] -= enve[p] * solX[j];
-                        p++;
+                if (p == limit) {
+                        matrix[j * n + j] = diagg[j];
+
+                        j++;
+                        limit = enveCol[j + 1];
+                        continue;
                 }
 
-                solX[j] = vecB[j] / diagg[j];
+                i = enveLin[p];
+                matrix[i * n + j] = enve[p];
+                p++;
+        }
+
+        return matrix - 1;
+}
+
+void build_envelope(env envelope, float *matrix)
+{
+        float *diagg = envelope->diagg;
+        float *enve = envelope->enve;
+        int *enveCol = envelope->enveCol;
+        int *enveLin = envelope->enveLin;
+
+        int n = (matrix - 1)[0];
+
+        int s, p;
+        int i, j, k;
+
+        s = 0;
+        p = 0;
+
+        j = 0;
+        while (j < n) {
+                diagg[j] = matrix[j * n + j];
+
+                i = 0;
+                while (i < j && matrix[i * n + j] == 0)
+                        i++;
+
+                enveCol[j] = p;
+
+                if (i == j) {
+                        j++;
+                        continue;
+                }
+
+                for (k = i; k < j; k++) {
+                        enve[p] = matrix[k * n + j];
+                        s++;
+                        enveLin[p] = k;
+                        p++;
+                }
 
                 j++;
         }
 
-        return solX;
-}
+        envelope->s = s;
 
-float *solve_back_substitution(env envelope, float vecB[])
-{
-        float *diagg = envelope->diagg;
-        float *enve = envelope->enve;
-        int *enveCol = envelope->enveCol;
-        int *enveLin = envelope->enveLin;
+        enve[p] = -1;
+        enveLin[p] = -1;
 
-        int n = envelope->n;
-        float *solX = (float *)calloc(n, sizeof(float));
+        enve = realloc(enve, (1 + s) * sizeof(float));
+        enveLin = realloc(enveLin, (1 + s) * sizeof(int));
 
-        int limit, l, p, j;
-
-        j = n - 1;
-        while (j > -1) {
-                solX[j] = vecB[j] / diagg[j];
-
-                p = enveCol[j];
-                limit = enveCol[j + 1];
-                while (p < limit) {
-                        l = enveLin[p];
-                        vecB[l] -= enve[p] * solX[j];
-                        p++;
-                }
-
-                j--;
-        }
-
-        return solX;
+        enveCol[n] = p;
 }

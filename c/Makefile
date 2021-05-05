@@ -1,6 +1,6 @@
 CC = gcc
-DEPS = test.o envelope-tools.o envelope-wrap.o envelope-solve.o
-TARGET = cTest
+DEPS = test.o tools.o wrap.o solve.o
+TARGET = envelope
 
 
 $(TARGET): $(DEPS)
@@ -12,7 +12,7 @@ all:
 test:
 	make clean
 	make
-	./cTest
+	./envelope
 
 
 

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-#include "envelope-tools.h"
+#include "tools.h"
 
 float get_element(env envelope, int indL, int indC)
 {
