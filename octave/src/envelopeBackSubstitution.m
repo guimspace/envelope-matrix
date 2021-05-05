@@ -33,7 +33,7 @@ function x = envelopeBackSubstitution (envelope, b)
 
     x = [];
 
-    A_n = max(size(diagg));
+    A_n = size(diagg)(2);
 
     for j = A_n:-1:1
         x(j) = b(j) / diagg(j);

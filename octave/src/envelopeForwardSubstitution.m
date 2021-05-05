@@ -33,7 +33,7 @@ function x = envelopeForwardSubstitution (envelope, b)
 
     x = [];
 
-    A_n = max(size(diagg));
+    A_n = size(diagg)(2);
 
     for j = 1:1:A_n
         i = enveCol(j);

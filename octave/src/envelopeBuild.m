@@ -28,8 +28,8 @@
 function envelope = envelopeBuild (A)
     diagg = diag(A)';
     enve = [];
-    enveLin = [];
     enveCol = [1];
+    enveLin = [];
 
     n = size(A)(2);
 
