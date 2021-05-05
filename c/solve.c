@@ -22,6 +22,70 @@
 
 #include "tools.h"
 
+void lu_decomposition(env triL, env triU)
+{
+        if (triU->diagg[0] == 0) {
+                printf("Factorization impossible\n");
+                return;
+        }
+
+        int i, j;
+        int l, p;
+        float u_ii, summ;
+
+        int n = triL->n;
+
+        for (i = 0; i < n; i++)
+                triL->diagg[i] = 1;
+
+        u_ii = triU->diagg[0];
+
+        for (j = 1; j < n; j++) {
+                p = triL->enveCol[j];
+                if (p == triL->enveCol[j + 1] || triL->enveLin[p] != 1)
+                        continue;
+
+                triL->enve[p] /= u_ii;
+        }
+
+        int n_1 = n - 1;
+        for (i = 1; i < n_1; i++) {
+                summ = sum_lki_ukj(triL, i, triU, i);
+                u_ii = triU->diagg[i] - summ;
+
+                if (u_ii == 0) {
+                        printf("Factorization impossible\n");
+                        return;
+                }
+
+                triU->diagg[i] = u_ii;
+
+                for (j = i + 1; j < n; j++) {
+                        p = triU->enveCol[j];
+                        l = triU->enveLin[p];
+                        p += i - l;
+                        if (l <= i && p < triU->enveCol[j + 1]) {
+                                summ = sum_lki_ukj(triL, i, triU, j);
+                                triU->enve[p] -= summ;
+                        }
+
+                        p = triL->enveCol[j];
+                        l = triL->enveLin[p];
+                        p += i - l;
+                        if (l <= i && p < triL->enveCol[j + 1]) {
+                                summ = sum_lki_ukj(triU, i, triL, j);
+                                triL->enve[p] = (triL->enve[p] - summ) / u_ii;
+                        }
+                }
+        }
+
+        summ = sum_lki_ukj(triL, n_1, triU, n_1);
+        triU->diagg[n_1] -= summ;
+
+        if (triU->diagg[n_1] == 0)
+                printf("A = LU but A is singular");
+}
+
 float *solve_forward_substitution(env envelope, float vecB[])
 {
         float *diagg = envelope->diagg;
