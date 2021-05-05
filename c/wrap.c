@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-#include "tools.h"
+#include "utils.h"
 #include "wrap.h"
 
 float *unwrap_envelope(env envelope)

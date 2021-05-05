@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-#include "tools.h"
+#include "utils.h"
 
 void lu_decomposition(env triL, env triU)
 {

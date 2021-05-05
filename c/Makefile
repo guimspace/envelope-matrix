@@ -1,5 +1,5 @@
 CC = gcc
-DEPS = test.o tools.o wrap.o solve.o
+DEPS = test.o utils.o wrap.o solve.o
 TARGET = envelope
 
 
