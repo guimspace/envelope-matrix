@@ -21,6 +21,7 @@
  */
 
 #include "utils.h"
+#include "solve.h"
 
 void lu_decomposition(env triL, env triU)
 {
