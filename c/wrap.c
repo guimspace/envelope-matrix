@@ -23,7 +23,7 @@
 #include "utils.h"
 #include "wrap.h"
 
-float *unwrap_envelope(env envelope)
+float *unwrap_envelope(env envelope, bool isLine)
 {
         float *diagg = envelope->diagg;
         float *enve = envelope->enve;
@@ -36,7 +36,7 @@ float *unwrap_envelope(env envelope)
         matrix[0] = n;
         matrix += 1;
 
-        int limit, p;
+        int limit, p, v;
         int i, j;
 
         p = enveCol[0];
@@ -52,15 +52,15 @@ float *unwrap_envelope(env envelope)
                         continue;
                 }
 
-                i = enveLin[p];
-                matrix[i * n + j] = enve[p];
+                v = isLine ? j * n + enveLin[p] : enveLin[p] * n + j;
+                matrix[v] = enve[p];
                 p++;
         }
 
         return matrix - 1;
 }
 
-void build_envelope(env envelope, float *matrix)
+void build_envelope(env envelope, float *matrix, bool isLine)
 {
         float *diagg = envelope->diagg;
         float *enve = envelope->enve;
@@ -69,8 +69,9 @@ void build_envelope(env envelope, float *matrix)
 
         int n = (matrix - 1)[0];
 
-        int s, p;
+        int s, p, v;
         int i, j, k;
+        int o = isLine ? 1 : n;
 
         s = 0;
         p = 0;
@@ -79,9 +80,13 @@ void build_envelope(env envelope, float *matrix)
         while (j < n) {
                 diagg[j] = matrix[j * n + j];
 
+                v = isLine ? j * n : j;
+
                 i = 0;
-                while (i < j && matrix[i * n + j] == 0)
+                while (i < j && matrix[v] == 0) {
                         i++;
+                        v += o;
+                }
 
                 enveCol[j] = p;
 
@@ -91,7 +96,9 @@ void build_envelope(env envelope, float *matrix)
                 }
 
                 for (k = i; k < j; k++) {
-                        enve[p] = matrix[k * n + j];
+                        enve[p] = matrix[v];
+                        v += o;
+
                         s++;
                         enveLin[p] = k;
                         p++;
