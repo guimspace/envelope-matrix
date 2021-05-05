@@ -14,3 +14,4 @@ typedef
 void print_envelope(env envelope);
 env init_envelope(int n);
 void end_envelope(env envelope);
+float get_element(env envelope, int indL, int indC);
