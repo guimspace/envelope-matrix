@@ -49,25 +49,20 @@ float sum_lki_ukj(env triL, int indI, env triU, int indJ)
 
 float get_element(env envelope, int indL, int indC)
 {
-        float *diagg = envelope->diagg;
-        float *enve = envelope->enve;
-        int *enveCol = envelope->enveCol;
-        int *enveLin = envelope->enveLin;
-
         if (indL == indC)
-                return diagg[indL];
-        else if (enveCol[indC] == enveCol[indC + 1])
+                return envelope->diagg[indL];
+        else if (envelope->enveCol[indC] == envelope->enveCol[indC + 1])
                 return 0;
 
-        int p = enveCol[indC];
-        int i = enveLin[p];
+        int p = envelope->enveCol[indC];
+        int i = envelope->enveLin[p];
 
         if (i > indL)
                 return 0;
 
         p += indL - i;
 
-        return enve[p];
+        return envelope->enve[p];
 }
 
 void print_envelope(env envelope)
