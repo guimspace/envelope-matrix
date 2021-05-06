@@ -1,5 +1,5 @@
 # Envelope Matrix
-[![License](https://img.shields.io/github/license/guimspace/envelope-matrix)](https://github.com/guimspace/envelope-matrix/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/guimspace/envelope-matrix)](https://github.com/guimspace/envelope-matrix/blob/main/LICENSE) [![Release](https://img.shields.io/github/v/release/guimspace/envelope-matrix)](https://github.com/guimspace/envelope-matrix/releases)
 
 > Methods to generate and work with envelopes of matrices.
 
