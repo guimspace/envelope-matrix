@@ -8,14 +8,41 @@
 void test_utils();
 void test_line();
 void test_substitution();
+void test_decomposition();
 
 int main(int argc, char **argv)
 {
         test_utils();
         test_line();
         test_substitution();
+        test_decomposition();
 
 	return 0;
+}
+
+void test_decomposition()
+{
+        float *solY, *solX;
+
+        float *A = (float[17]){4, 1, 1, -1, 2, 1, 2, 0, 2, -1, -1, 2, 0, 0, 0, -1, 1};
+        float b[4] = {8, 13, 3, 1};
+        int n = A[0];
+
+        env triL = init_envelope(n);
+        env triU = init_envelope(n);
+
+        A += 1;
+
+        build_envelope(triL, A, true);
+        build_envelope(triU, A, false);
+
+        lu_decomposition(triL, triU);
+
+        solY = solve_forward_substitution(triL, b);
+        solX = solve_back_substitution(triU, solY);
+
+        for (int i = 0; i < n; i++)
+                printf("%.2f\n", solX[i]);
 }
 
 void test_substitution()
