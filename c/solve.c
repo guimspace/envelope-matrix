@@ -87,15 +87,15 @@ void lu_decomposition(env triL, env triU)
                 printf("A = LU but A is singular\n");
 }
 
-float *solve_forward_substitution(env envelope, float vecB[])
+float *solve_forward_substitution(env triL, float b[])
 {
-        float *diagg = envelope->diagg;
-        float *enve = envelope->enve;
-        int *enveCol = envelope->enveCol;
-        int *enveLin = envelope->enveLin;
+        float *diagg = triL->diagg;
+        float *enve = triL->enve;
+        int *enveCol = triL->enveCol;
+        int *enveLin = triL->enveLin;
 
-        int n = envelope->n;
-        float *solX = (float *)calloc(n, sizeof(float));
+        int n = triL->n;
+        float *x = (float *)calloc(n, sizeof(float));
 
         int limit, l, p, j;
 
@@ -105,44 +105,44 @@ float *solve_forward_substitution(env envelope, float vecB[])
                 limit = enveCol[j + 1];
                 while (p < limit) {
                         l = enveLin[p];
-                        vecB[j] -= enve[p] * solX[l];
+                        b[j] -= enve[p] * x[l];
                         p++;
                 }
 
-                solX[j] = vecB[j] / diagg[j];
+                x[j] = b[j] / diagg[j];
 
                 j++;
         }
 
-        return solX;
+        return x;
 }
 
-float *solve_back_substitution(env envelope, float vecB[])
+float *solve_back_substitution(env triU, float b[])
 {
-        float *diagg = envelope->diagg;
-        float *enve = envelope->enve;
-        int *enveCol = envelope->enveCol;
-        int *enveLin = envelope->enveLin;
+        float *diagg = triU->diagg;
+        float *enve = triU->enve;
+        int *enveCol = triU->enveCol;
+        int *enveLin = triU->enveLin;
 
-        int n = envelope->n;
-        float *solX = (float *)calloc(n, sizeof(float));
+        int n = triU->n;
+        float *x = (float *)calloc(n, sizeof(float));
 
         int limit, l, p, j;
 
         j = n - 1;
         while (j > -1) {
-                solX[j] = vecB[j] / diagg[j];
+                x[j] = b[j] / diagg[j];
 
                 p = enveCol[j];
                 limit = enveCol[j + 1];
                 while (p < limit) {
                         l = enveLin[p];
-                        vecB[l] -= enve[p] * solX[j];
+                        b[l] -= enve[p] * x[j];
                         p++;
                 }
 
                 j--;
         }
 
-        return solX;
+        return x;
 }
