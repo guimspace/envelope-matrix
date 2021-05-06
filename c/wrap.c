@@ -23,7 +23,7 @@
 #include "utils.h"
 #include "wrap.h"
 
-float *unwrap_envelope(env envelope, bool isLine)
+void unwrap_envelope(env envelope, float *matrix, bool isLine)
 {
         float *diagg = envelope->diagg;
         float *enve = envelope->enve;
@@ -32,8 +32,6 @@ float *unwrap_envelope(env envelope, bool isLine)
 
         int n = envelope->n;
 
-        float *matrix = (float*)calloc(1 + n * n, sizeof(float));
-        matrix[0] = n;
         matrix += 1;
 
         int limit, p, v;
@@ -57,7 +55,7 @@ float *unwrap_envelope(env envelope, bool isLine)
                 p++;
         }
 
-        return matrix - 1;
+        matrix -= 1;
 }
 
 void build_envelope(env envelope, float *matrix, bool isLine)

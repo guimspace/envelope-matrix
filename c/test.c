@@ -86,7 +86,8 @@ void test_line()
 
         int n = (matrix - 1)[0];
 
-        float *regen = unwrap_envelope(envelope, true);
+        float *regen = (float*)calloc(1 + n * n, sizeof(float));
+        unwrap_envelope(envelope, regen, true);
         regen += 1;
 
         int i = 0;
@@ -138,7 +139,8 @@ void test_utils()
         }
         printf("\n");
 
-        float *regen = unwrap_envelope(envelope, false);
+        float *regen = (float*)calloc(1 + n * n, sizeof(float));;
+        unwrap_envelope(envelope, regen, false);
         if ((int)regen[0] != n)
                 printf("%d != %d\tMismatch dimension", (int)regen[0], n);
         regen += 1;
