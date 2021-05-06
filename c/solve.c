@@ -84,7 +84,7 @@ void lu_decomposition(env triL, env triU)
         triU->diagg[n_1] -= summ;
 
         if (triU->diagg[n_1] == 0)
-                printf("A = LU but A is singular");
+                printf("A = LU but A is singular\n");
 }
 
 float *solve_forward_substitution(env envelope, float vecB[])
