@@ -105,7 +105,7 @@ float *solve_forward_substitution(env envelope, float vecB[])
                 limit = enveCol[j + 1];
                 while (p < limit) {
                         l = enveLin[p];
-                        vecB[j] -= enve[p] * solX[j];
+                        vecB[j] -= enve[p] * solX[l];
                         p++;
                 }
 
