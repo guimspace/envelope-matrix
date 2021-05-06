@@ -73,16 +73,22 @@ void print_envelope(env envelope)
                 printf("%.2f\t", envelope->diagg[i]);
         printf("\n");
 
-        for (i = 0; i <= envelope->s; i++)
+        i = -1;
+        do {
+                i++;
                 printf("%.2f\t", envelope->enve[i]);
+        } while (envelope->enve[i] != -1);
         printf("\n");
 
         for (i = 0; i <= envelope->n; i++)
                 printf("%d\t", envelope->enveCol[i]);
         printf("\n");
 
-        for (i = 0; i <= envelope->s; i++)
+        i = -1;
+        do {
+                i++;
                 printf("%d\t", envelope->enveLin[i]);
+        } while (envelope->enveLin[i] != -1);
         printf("\n");
 }
 
@@ -104,7 +110,6 @@ env init_envelope(int n)
         env envelope = malloc( sizeof(strEnvelope) );
 
         envelope->n = n;
-        envelope->s = s;
         envelope->diagg = (float *)calloc(n, sizeof(float));
         envelope->enve = (float *)calloc(1 + s, sizeof(float));
         envelope->enveCol = (int *)calloc(1 + n, sizeof(int));

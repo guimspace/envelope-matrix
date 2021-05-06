@@ -9,7 +9,6 @@ typedef int bool;
 typedef
         struct strEnvelope {
                 int n;
-                int s;
                 float *diagg;
                 float *enve;
                 int *enveCol;

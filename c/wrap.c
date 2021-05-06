@@ -105,8 +105,6 @@ void build_envelope(env envelope, float *matrix, bool isLine)
                 j++;
         }
 
-        envelope->s = s;
-
         enve[p] = -1;
         enveLin[p] = -1;
 
