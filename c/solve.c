@@ -117,7 +117,7 @@ float *solve_forward_substitution(env triL, float b[])
         return x;
 }
 
-float *solve_back_substitution(env triU, float b[])
+float *solve_backward_substitution(env triU, float b[])
 {
         float *diagg = triU->diagg;
         float *enve = triU->enve;

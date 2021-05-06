@@ -39,7 +39,7 @@ void test_decomposition()
         lu_decomposition(triL, triU);
 
         solY = solve_forward_substitution(triL, b);
-        solX = solve_back_substitution(triU, solY);
+        solX = solve_backward_substitution(triU, solY);
 
         for (int i = 0; i < n; i++)
                 printf("%.2f\n", solX[i]);
@@ -58,7 +58,7 @@ void test_substitution()
 
         build_envelope(envelope, triU, false);
 
-        solX = solve_back_substitution(envelope, vecB);
+        solX = solve_backward_substitution(envelope, vecB);
         for (i = 0; i < n; i++)
                 printf("%.2f\n", solX[i]);
         free(solX);
