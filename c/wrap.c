@@ -68,11 +68,10 @@ void build_envelope(env envelope, float *matrix, bool isLine)
 
         int n = (matrix - 1)[0];
 
-        int s, p, v;
+        int p, v;
         int i, j, k;
         int o = isLine ? 1 : n;
 
-        s = 0;
         p = 0;
 
         j = 0;
@@ -98,7 +97,6 @@ void build_envelope(env envelope, float *matrix, bool isLine)
                         enve[p] = matrix[v];
                         v += o;
 
-                        s++;
                         enveLin[p] = k;
                         p++;
                 }
@@ -109,8 +107,8 @@ void build_envelope(env envelope, float *matrix, bool isLine)
         enve[p] = -1;
         enveLin[p] = -1;
 
-        enve = realloc(enve, (1 + s) * sizeof(float));
-        enveLin = realloc(enveLin, (1 + s) * sizeof(int));
+        enve = realloc(enve, (1 + p) * sizeof(float));
+        enveLin = realloc(enveLin, (1 + p) * sizeof(int));
 
         enveCol[n] = p;
 }
