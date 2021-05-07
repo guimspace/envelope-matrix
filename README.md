@@ -3,7 +3,7 @@
 
 > Methods to generate and work with envelopes of matrices.
 
-**Notice** Use _envelope-matrix_ script for educational purposes only. The script is NOT suitable for professional application as it is not meant to be the most efficient, optimized, correct and secure implementation.
+**Notice** Use _envelope-matrix_ methods for educational purposes only. The methods are NOT suitable for professional application as it is not meant to be the most efficient, optimized, correct and secure implementation.
 
 > The _envelope_ of a symmetric or upper-triangular matrix _A_ is a set of ordered pais _(i, j)_, _i < j_, representing element locations in the upper triangle of _A_, defined as follows:
 >   _(i, j)_ is in the envelope of _A_ if and only if _a\_kj != 0_ for some _k <= i_. Thus, if the first nonzero entry of the _j_ th column is _a\_mj_ and _m < j_, then _(m, j)_, _(m + 1, j)_, ..., _(j - 1, j)_ are the members of the envelope of _A_ from the _j_ th column. [1]
@@ -11,9 +11,7 @@
 
 ## About
 
-The scripts are tested for GNU Octave software.
-
-A basic data structure of four arrays can be used to store the envelope a matrix _A_.
+A basic data structure of four arrays is one way to store the envelope a matrix _A_.
 
 Array | Description
 ---|---
