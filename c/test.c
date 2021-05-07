@@ -139,7 +139,7 @@ void test_utils()
         }
         printf("\n");
 
-        float *regen = (float*)calloc(1 + n * n, sizeof(float));;
+        float *regen = (float*)calloc(1 + n * n, sizeof(float));
         unwrap_envelope(envelope, regen, false);
         if ((int)regen[0] != n)
                 printf("%d != %d\tMismatch dimension", (int)regen[0], n);
