@@ -77,6 +77,7 @@ void build_envelope(env envelope, float *matrix, bool isLine)
         j = 0;
         while (j < n) {
                 diagg[j] = matrix[j * n + j];
+                enveCol[j] = p;
 
                 v = isLine ? j * n : j;
 
@@ -86,15 +87,13 @@ void build_envelope(env envelope, float *matrix, bool isLine)
                         v += o;
                 }
 
-                enveCol[j] = p;
-
                 while (i < j) {
                         enve[p] = matrix[v];
-                        v += o;
-
                         enveLin[p] = i;
-                        p++;
+
                         i++;
+                        v += o;
+                        p++;
                 }
 
                 j++;
