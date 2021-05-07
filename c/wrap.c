@@ -32,6 +32,7 @@ void unwrap_envelope(env envelope, float *matrix, bool isLine)
 
         int n = envelope->n;
 
+        matrix[0] = n;
         matrix += 1;
 
         int limit, p, v;
