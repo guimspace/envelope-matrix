@@ -69,7 +69,7 @@ void build_envelope(env envelope, float *matrix, bool isLine)
         int n = (matrix - 1)[0];
 
         int p, v;
-        int i, j, k;
+        int i, j;
         int o = isLine ? 1 : n;
 
         p = 0;
@@ -88,17 +88,13 @@ void build_envelope(env envelope, float *matrix, bool isLine)
 
                 enveCol[j] = p;
 
-                if (i == j) {
-                        j++;
-                        continue;
-                }
-
-                for (k = i; k < j; k++) {
+                while (i < j) {
                         enve[p] = matrix[v];
                         v += o;
 
-                        enveLin[p] = k;
+                        enveLin[p] = i;
                         p++;
+                        i++;
                 }
 
                 j++;
