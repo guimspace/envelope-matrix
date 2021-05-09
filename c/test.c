@@ -145,18 +145,14 @@ void test_utils()
                 printf("%d != %d\tMismatch dimension", (int)regen[0], n);
         regen += 1;
 
-        while (i < n) {
-                if (regen[i * n + j] != matrix[i * n + j]) {
-                        printf("%.2f != %.2f\tat ", regen[i * n + j], matrix[i * n + j]);
-                        printf("(%d, %d)\n", i, j);
+        i = 0;
+        int n_2 = n * n;
+        while (i < n_2) {
+                if (regen[i] != matrix[i]) {
+                        printf("%.2f != %.2f\tat ", regen[i], matrix[i]);
+                        printf("(%d, %d)\n", i / n, i % n);
                 }
-
-                if (j == i) {
-                        i++;
-                        j = i;
-                } else {
-                        j++;
-                }
+                i++;
         }
 
         end_envelope(envelope);
