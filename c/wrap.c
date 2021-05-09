@@ -43,17 +43,16 @@ void unwrap_envelope(env envelope, float *matrix, bool isLine)
 
         j = 0;
         while (j < n) {
-                if (p == limit) {
+                if (p < limit) {
+                        v = isLine ? j * n + enveLin[p] : enveLin[p] * n + j;
+                        matrix[v] = enve[p];
+                        p++;
+                } else {
                         matrix[j * n + j] = diagg[j];
 
                         j++;
                         limit = enveCol[j + 1];
-                        continue;
                 }
-
-                v = isLine ? j * n + enveLin[p] : enveLin[p] * n + j;
-                matrix[v] = enve[p];
-                p++;
         }
 
         matrix -= 1;
