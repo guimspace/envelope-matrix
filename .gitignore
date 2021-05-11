@@ -1,4 +1,5 @@
 c/*.o
+c/*.m
 c/envelope
 
 __pycache__
