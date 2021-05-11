@@ -114,11 +114,11 @@ void test_utils()
         printf("\n");
 
         float *regen = (float*)calloc(1 + n * n, sizeof(float));
+        regen[0] = n;
+        regen += 1;
 
         unwrap_envelope(triL, regen, true);
         unwrap_envelope(triU, regen, false);
-
-        regen += 1;
 
         i = 0;
         while (i < n_2) {
