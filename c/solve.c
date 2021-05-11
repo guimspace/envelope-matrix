@@ -43,7 +43,7 @@ void lu_decomposition(env triL, env triU)
 
         for (j = 1; j < n; j++) {
                 p = triL->enveCol[j];
-                if (p == triL->enveCol[j + 1] || triL->enveLin[p] != 1)
+                if (p == triL->enveCol[j + 1] || triL->enveLin[p] != 0)
                         continue;
 
                 triL->enve[p] /= u_ii;
