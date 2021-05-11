@@ -6,14 +6,12 @@
 #include "solve.h"
 
 void test_utils();
-void test_line();
 void test_substitution();
 void test_decomposition();
 
 int main(int argc, char **argv)
 {
         test_utils();
-        test_line();
         test_substitution();
         test_decomposition();
 
@@ -73,80 +71,56 @@ void test_substitution()
         end_envelope(envelope);
 }
 
-void test_line()
-{
-        float *matrix = (float[37]){6, 11, 12, 0, 14, 0, 0, -12, 22, 23, 0, 0, 0, 0, -23, 33, 0, 0, 0, -14, 0, 0, 44, 0, 46, 0, 0, 0, 0, 55, 0, 0, 0, 0, -46, 0, 66};
-
-        env envelope = init_envelope(matrix[0]);
-        matrix += 1;
-
-        build_envelope(envelope, matrix, true);
-        print_envelope(envelope);
-        printf("\n");
-
-        int n = (matrix - 1)[0];
-
-        float *regen = (float*)calloc(1 + n * n, sizeof(float));
-        unwrap_envelope(envelope, regen, true);
-        regen += 1;
-
-        int i = 0;
-        int j = 0;
-        while (i < n) {
-                if (regen[i * n + j] != matrix[i * n + j]) {
-                        printf("%.2f != %.2f\tat ", regen[i * n + j], matrix[i * n + j]);
-                        printf("(%d, %d)\n", i, j);
-                }
-
-                if (j == i) {
-                        i++;
-                        j = 0;
-                } else {
-                        j++;
-                }
-        }
-
-        end_envelope(envelope);
-        printf("\n");
-}
-
 void test_utils()
 {
-        float *matrix = (float[37]){6, 11, 12, 0, 14, 0, 0, 0, 22, 23, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 44, 0, 46, 0, 0, 0, 0, 55, 0, 0, 0, 0, 0, 0, 66};
+        float *matrix = (float[37]){6, 11, 12, 0, 14, 0, 0, -12, 22, 23, 0, 0, 0, 0, -23, 33, 0, 0, 0, -14, 0, 0, 44, 0, 46, 0, 0, 0, 0, 55, 0, 0, 0, 0, -46, 0, 66};
+        int n = (int)matrix[0];
+        int n_2 = n * n;
+        int i, j;
 
-        env envelope = init_envelope(matrix[0]);
+        env triU = init_envelope(n);
+        env triL = init_envelope(n);
+
         matrix += 1;
 
-        build_envelope(envelope, matrix, false);
-        print_envelope(envelope);
+        build_envelope(triL, matrix, true);
+        print_envelope(triL);
         printf("\n");
 
-        int i = 0;
-        int j = 0;
-        int n = (matrix - 1)[0];
+        build_envelope(triU, matrix, false);
+        print_envelope(triU);
+        printf("\n");
+
+        i = 0;
+        j = 0;
         while (i < n) {
-                if (get_element(envelope, i, j) != matrix[i * n + j]) {
-                        printf("%.2f != %.2f\tat ", get_element(envelope, i, j), matrix[i * n + j]);
+                if (get_element(triL, j, i) != matrix[i * n + j]) {
+                        printf("l: %.2f != %.2f\tat ", get_element(triL, j, i), matrix[i * n + j]);
                         printf("(%d, %d)\n", i, j);
                 }
 
-                if (j == i) {
-                        i++;
-                        j = i;
-                } else {
-                        j++;
+                if (get_element(triU, j, i) != matrix[j * n + i]) {
+                        printf("c: %.2f != %.2f\tat ", get_element(triU, j, i), matrix[j * n + i]);
+                        printf("(%d, %d)\n", j, i);
                 }
+
+                if (j == i) {
+                        j = 0;
+                        i++;
+                }
+
+                j++;
         }
         printf("\n");
 
         float *regen = (float*)calloc(1 + n * n, sizeof(float));
-        unwrap_envelope(envelope, regen, false);
-        if ((int)regen[0] != n)
-                printf("%d != %d\tMismatch dimension", (int)regen[0], n);
+
+        unwrap_envelope(triL, regen, true);
+        unwrap_envelope(triU, regen, false);
+
         regen += 1;
 
         i = 0;
-        int n_2 = n * n;
         while (i < n_2) {
                 if (regen[i] != matrix[i]) {
                         printf("%.2f != %.2f\tat ", regen[i], matrix[i]);
@@ -155,6 +129,7 @@ void test_utils()
                 i++;
         }
 
-        end_envelope(envelope);
+        end_envelope(triL);
+        end_envelope(triU);
         printf("\n");
 }
