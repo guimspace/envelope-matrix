@@ -18,7 +18,7 @@ enveTriU = envelopeBuild(triu(PA));
 
 
 y = envelopeForwardSubstitution(L, b);
-x = envelopeBackSubstitution(U, y)
+x = envelopeBackwardSubstitution(U, y)
 
 
 
@@ -36,7 +36,7 @@ enveTriU = envelopeBuild(triu(A));
 
 
 y = envelopeForwardSubstitution(L, b);
-x = envelopeBackSubstitution(U, y)
+x = envelopeBackwardSubstitution(U, y)
 
 
 
@@ -54,7 +54,7 @@ enveTriU = envelopeBuild(triu(A));
 
 
 y = envelopeForwardSubstitution(L, b);
-x = envelopeBackSubstitution(U, y)
+x = envelopeBackwardSubstitution(U, y)
 
 
 
@@ -79,4 +79,4 @@ enveTriU = envelopeBuild(triu(A));
 
 
 y = envelopeForwardSubstitution(L, b);
-x = envelopeBackSubstitution(U, y)
+x = envelopeBackwardSubstitution(U, y)

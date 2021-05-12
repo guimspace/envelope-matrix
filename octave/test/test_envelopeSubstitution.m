@@ -12,4 +12,4 @@ envelope = envelopeBuild(L');
 y = envelopeForwardSubstitution(envelope, b);
 
 envelope = envelopeBuild(U);
-x = envelopeBackSubstitution(envelope, y)
+x = envelopeBackwardSubstitution(envelope, y)

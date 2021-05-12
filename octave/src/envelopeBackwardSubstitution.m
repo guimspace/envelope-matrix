@@ -25,7 +25,7 @@
  % @param   {Array}         b           The vector b.
  % @return  {Array}         x           The solution of the system.
  %%
-function x = envelopeBackSubstitution (envelope, b)
+function x = envelopeBackwardSubstitution (envelope, b)
     diagg = envelope{1};
     enve = envelope{2};
     enveCol = envelope{3};
