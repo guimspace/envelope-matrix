@@ -8,14 +8,77 @@
 void test_utils();
 void test_substitution();
 void test_decomposition();
+void test_file_lu(char *file_A, char *file_b);
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
+        if (argc > 2) {
+                test_file_lu(argv[1], argv[2]);
+                return 0;
+        }
+
         test_utils();
         test_substitution();
         test_decomposition();
 
+
 	return 0;
+}
+
+void test_file_lu(char *file_A, char *file_b)
+{
+        int n = 0;
+        scanf("%d", &n);
+        int n_2 = n * n;
+
+        int i;
+        char c;
+
+        FILE *file_object = NULL;
+
+        file_object = fopen(file_A, "r");
+        if (file_object == NULL) {
+                printf("File could not be opened\n");
+                return;
+        }
+
+        float *A = (float*)calloc(1 + n * n, sizeof(float));
+        A[0] = n;
+
+        A++;
+        for (i = 0; i < n_2; i++)
+                fscanf(file_object, "%f%c", &A[i], &c);
+        A--;
+
+        file_object = fopen(file_b, "r");
+        if (file_object == NULL) {
+                printf("File could not be opened\n");
+                return;
+        }
+
+        float *b = (float*)calloc(n, sizeof(float));
+        for (i = 0; i < n; i++)
+                fscanf(file_object, "%f%c", &b[i], &c);
+
+        env triL = init_envelope(n);
+        env triU = init_envelope(n);
+
+        build_envelope(triL, A, true);
+        build_envelope(triU, A, false);
+
+        lu_decomposition(triL, triU);
+
+        float *y = solve_forward_substitution(triL, b);
+        float *x = solve_backward_substitution(triU, y);
+
+        for (int i = 0; i < n; i++)
+                printf("%.2f\n", x[i]);
+        printf("\n");
+
+        end_envelope(triL);
+        end_envelope(triU);
+        free(y);
+        free(x);
 }
 
 void test_decomposition()
@@ -37,6 +100,8 @@ void test_decomposition()
 
         for (int i = 0; i < n; i++)
                 printf("%.2f\n", x[i]);
+
+        printf("\n");
 
         end_envelope(triL);
         end_envelope(triU);
