@@ -20,8 +20,6 @@ int main(int argc, char **argv)
 
 void test_decomposition()
 {
-        float *solY, *solX;
-
         float *A = (float[17]){4, 1, 1, -1, 2, 1, 2, 0, 2, -1, -1, 2, 0, 0, 0, -1, 1};
         float b[4] = {8, 13, 3, 1};
         int n = A[0];
@@ -34,11 +32,16 @@ void test_decomposition()
 
         lu_decomposition(triL, triU);
 
-        solY = solve_forward_substitution(triL, b);
-        solX = solve_backward_substitution(triU, solY);
+        float *y = solve_forward_substitution(triL, b);
+        float *x = solve_backward_substitution(triU, y);
 
         for (int i = 0; i < n; i++)
-                printf("%.2f\n", solX[i]);
+                printf("%.2f\n", x[i]);
+
+        end_envelope(triL);
+        end_envelope(triU);
+        free(y);
+        free(x);
 }
 
 void test_substitution()
