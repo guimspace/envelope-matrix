@@ -1,5 +1,6 @@
 c/*.o
 c/*.m
+c/*.mat
 c/envelope
 
 __pycache__
