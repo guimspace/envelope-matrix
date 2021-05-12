@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "utils.h"
-#include "wrap.h"
-#include "solve.h"
+#include "../src/utils.h"
+#include "../src/wrap.h"
+#include "../src/solve.h"
 
 void test_utils();
 void test_substitution();
