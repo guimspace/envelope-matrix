@@ -31,6 +31,8 @@ void unwrap_envelope(env envelope, float *matrix, bool isLine)
         int *enveLin = envelope->enveLin;
 
         int n = envelope->n;
+        matrix[0] = n;
+        matrix++;
 
         int limit, p, v;
         int i, j;
@@ -54,6 +56,8 @@ void unwrap_envelope(env envelope, float *matrix, bool isLine)
                         limit = enveCol[j + 1];
                 }
         }
+
+        matrix--;
 }
 
 void build_envelope(env envelope, float *matrix, bool isLine)
@@ -63,7 +67,8 @@ void build_envelope(env envelope, float *matrix, bool isLine)
         int *enveCol = envelope->enveCol;
         int *enveLin = envelope->enveLin;
 
-        int n = (matrix - 1)[0];
+        int n = matrix[0];
+        matrix++;
 
         int p, v;
         int i, j;
@@ -104,4 +109,5 @@ void build_envelope(env envelope, float *matrix, bool isLine)
         enveLin = realloc(enveLin, (1 + p) * sizeof(int));
 
         enveCol[n] = p;
+        matrix--;
 }

@@ -29,8 +29,6 @@ void test_decomposition()
         env triL = init_envelope(n);
         env triU = init_envelope(n);
 
-        A += 1;
-
         build_envelope(triL, A, true);
         build_envelope(triU, A, false);
 
@@ -52,7 +50,6 @@ void test_substitution()
 
         n = triU[0];
         env envelope = init_envelope(n);
-        triU += 1;
 
         build_envelope(envelope, triU, false);
 
@@ -81,8 +78,6 @@ void test_utils()
         env triU = init_envelope(n);
         env triL = init_envelope(n);
 
-        matrix += 1;
-
         build_envelope(triL, matrix, true);
         print_envelope(triL);
         printf("\n");
@@ -93,6 +88,8 @@ void test_utils()
 
         i = 0;
         j = 0;
+        matrix++;
+
         while (i < n) {
                 if (get_element(triL, j, i) != matrix[i * n + j]) {
                         printf("l: %.2f != %.2f\tat ", get_element(triL, j, i), matrix[i * n + j]);
@@ -114,11 +111,10 @@ void test_utils()
         printf("\n");
 
         float *regen = (float*)calloc(1 + n * n, sizeof(float));
-        regen[0] = n;
-        regen += 1;
 
         unwrap_envelope(triL, regen, true);
         unwrap_envelope(triU, regen, false);
+        regen++;
 
         i = 0;
         while (i < n_2) {
