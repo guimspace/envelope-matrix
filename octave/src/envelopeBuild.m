@@ -29,7 +29,7 @@ function envelope = envelopeBuild (A)
     diagg = diag(A)';
     enve = [];
     enveCol = [1];
-    enveLin = [];
+    enveLin = [1];
 
     n = size(A)(2);
     last = 0;
@@ -44,6 +44,9 @@ function envelope = envelopeBuild (A)
         s = 1 + last;
         enveCol = [enveCol s];
 
+        % line number of elements
+        enveLin = [enveLin i];
+
         % if column is zero up to diagonal, skip to next
         if (i == j)
             continue
@@ -53,13 +56,9 @@ function envelope = envelopeBuild (A)
         next = A(i:(j-1), j)';
         enve = [enve next];
         last = last + j - i;
-
-        % line number of elements
-        enveLin = [enveLin i:(j-1)];
     end
 
     enve = [enve 0];
-    enveLin = [enveLin 0];
 
     s = 1 + last;
     enveCol = [enveCol s];

@@ -32,10 +32,10 @@ float sum_lki_ukj(env triL, int indI, env triU, int indJ)
         int pU = triU->enveCol[indJ];
         int nU = triU->enveCol[indJ + 1];
 
-        if (triL->enveLin[pL] >= triU->enveLin[pU])
-                pU += triL->enveLin[pL] - triU->enveLin[pU];
+        if (triL->enveLin[indI] >= triU->enveLin[indJ])
+                pU += triL->enveLin[indI] - triU->enveLin[indJ];
         else
-                pL += triU->enveLin[pU] - triL->enveLin[pL];
+                pL += triU->enveLin[indJ] - triL->enveLin[indI];
 
         while (pL < nL && pU < nU) {
                 summ += triL->enve[pL] * triU->enve[pU];
@@ -55,7 +55,7 @@ float get_element(env envelope, int indL, int indC)
                 return 0;
 
         int p = envelope->enveCol[indC];
-        int i = envelope->enveLin[p];
+        int i = envelope->enveLin[indC];
 
         if (i > indL)
                 return 0;
@@ -84,11 +84,8 @@ void print_envelope(env envelope)
                 printf("%d\t", envelope->enveCol[i]);
         printf("\n");
 
-        i = -1;
-        do {
-                i++;
+        for (i = 0; i < envelope->n; i++)
                 printf("%d\t", envelope->enveLin[i]);
-        } while (envelope->enveLin[i] != -1);
         printf("\n");
 }
 
@@ -113,7 +110,7 @@ env init_envelope(int n)
         envelope->diagg = (float *)calloc(n, sizeof(float));
         envelope->enve = (float *)calloc(1 + s, sizeof(float));
         envelope->enveCol = (int *)calloc(1 + n, sizeof(int));
-        envelope->enveLin = (int *)calloc(1 + s, sizeof(int));
+        envelope->enveLin = (int *)calloc(n, sizeof(int));
 
         return envelope;
 }

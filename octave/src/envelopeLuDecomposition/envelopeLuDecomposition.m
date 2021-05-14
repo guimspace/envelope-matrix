@@ -38,7 +38,7 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
     u_ii = enveTriU{1}(1);
     for j = 2:n
         pos = enveTriL{3}(j);
-        if (pos == enveTriL{3}(j + 1) || enveTriL{4}(pos) ~= 1)
+        if (pos == enveTriL{3}(j + 1) || enveTriL{4}(j) ~= 1)
             continue
         end
 
@@ -58,7 +58,7 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
 
         for j = (i + 1):n
             pos = enveTriU{3}(j);
-            l = enveTriU{4}(pos);
+            l = enveTriU{4}(j);
             pos = pos + i - l;
             if (l <= i && pos < enveTriU{3}(j + 1))
                 summ = sumLkiUkj(enveTriL, i, enveTriU, j);
@@ -66,7 +66,7 @@ function [enveTriL, enveTriU] = envelopeLuDecomposition (enveTriL, enveTriU)
             end
 
             pos = enveTriL{3}(j);
-            l = enveTriL{4}(pos);
+            l = enveTriL{4}(j);
             pos = pos + i - l;
             if (l <= i && pos < enveTriL{3}(j + 1))
                 summ = sumLkiUkj(enveTriU, i, enveTriL, j);

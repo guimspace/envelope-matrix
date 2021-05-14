@@ -51,11 +51,12 @@ function A = envelopeUnwrap (envelope)
         pos = pos + 1;
     end
 
+    l = enveLin(pos);
     while (pos < n)
-        l = enveLin(pos);
         A(l, j) = enve(pos);
 
         pos = pos + 1;
+        l = l + 1;
     end
     A(j, j) = diagg(j);
 end

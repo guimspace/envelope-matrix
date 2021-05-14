@@ -40,12 +40,12 @@ function x = envelopeBackwardSubstitution (envelope, b)
 
         i = enveCol(j);
         n = enveCol(j + 1);
+        l = enveLin(j);
         while (i < n)
-            l = enveLin(i);
-
             b(l) = b(l) - enve(i) * x(j);
 
             i = i + 1;
+            l = l + 1;
         end
     end
 

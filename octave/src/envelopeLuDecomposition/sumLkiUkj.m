@@ -36,10 +36,10 @@ function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
     posU = enveTriU{3}(indJ);
     nU = enveTriU{3}(indJ + 1);
 
-    if (enveTriL{4}(posL) >= enveTriU{4}(posU))
-        posU = posU + (enveTriL{4}(posL) - enveTriU{4}(posU));
+    if (enveTriL{4}(indI) >= enveTriU{4}(indJ))
+        posU = posU + (enveTriL{4}(indI) - enveTriU{4}(indJ));
     else
-        posL = posL + (enveTriU{4}(posU) - enveTriL{4}(posL));
+        posL = posL + (enveTriU{4}(indJ) - enveTriL{4}(indI));
     end
 
     while (posL < nL && posU < nU)

@@ -38,12 +38,12 @@ function x = envelopeForwardSubstitution (envelope, b)
     for j = 1:1:A_n
         i = enveCol(j);
         n = enveCol(j + 1);
+        l = enveLin(j);
         while (i < n)
-            l = enveLin(i);
-
             b(j) = b(j) - enve(i) * x(l);
 
             i = i + 1;
+            l = l + 1;
         end
 
         x(j) = b(j) / diagg(j);

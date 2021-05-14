@@ -43,7 +43,7 @@ void lu_decomposition(env triL, env triU)
 
         for (j = 1; j < n; j++) {
                 p = triL->enveCol[j];
-                if (p == triL->enveCol[j + 1] || triL->enveLin[p] != 0)
+                if (p == triL->enveCol[j + 1] || triL->enveLin[j] != 0)
                         continue;
 
                 triL->enve[p] /= u_ii;
@@ -63,7 +63,7 @@ void lu_decomposition(env triL, env triU)
 
                 for (j = i + 1; j < n; j++) {
                         p = triU->enveCol[j];
-                        l = triU->enveLin[p];
+                        l = triU->enveLin[j];
                         p += i - l;
                         if (l <= i && p < triU->enveCol[j + 1]) {
                                 summ = sum_lki_ukj(triL, i, triU, j);
@@ -71,7 +71,7 @@ void lu_decomposition(env triL, env triU)
                         }
 
                         p = triL->enveCol[j];
-                        l = triL->enveLin[p];
+                        l = triL->enveLin[j];
                         p += i - l;
                         if (l <= i && p < triL->enveCol[j + 1]) {
                                 summ = sum_lki_ukj(triU, i, triL, j);
@@ -103,10 +103,11 @@ float *solve_forward_substitution(env triL, float b[])
         while (j < n) {
                 p = enveCol[j];
                 limit = enveCol[j + 1];
+                l = enveLin[j];
                 while (p < limit) {
-                        l = enveLin[p];
                         b[j] -= enve[p] * x[l];
                         p++;
+                        l++;
                 }
 
                 x[j] = b[j] / diagg[j];
@@ -135,10 +136,11 @@ float *solve_backward_substitution(env triU, float b[])
 
                 p = enveCol[j];
                 limit = enveCol[j + 1];
+                l = enveLin[j];
                 while (p < limit) {
-                        l = enveLin[p];
                         b[l] -= enve[p] * x[j];
                         p++;
+                        l++;
                 }
 
                 j--;
