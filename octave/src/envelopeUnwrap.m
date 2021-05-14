@@ -38,7 +38,7 @@ function A = envelopeUnwrap (envelope)
     n = enveCol(2);
     while (j < A_n)
         if (pos ~= n)
-            l = enveLin(pos);
+            l = enveLin(j);
             A(l, j) = enve(pos);
 
             pos = pos + 1;
@@ -50,7 +50,7 @@ function A = envelopeUnwrap (envelope)
         end
     end
 
-    l = enveLin(pos);
+    l = enveLin(j);
     while (pos < n)
         A(l, j) = enve(pos);
 

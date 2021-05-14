@@ -40,15 +40,12 @@ function a_ij = envelopeRead (indL, indC, envelope)
         return;
     end
 
-    pos = enveCol(indC);
-    i = enveLin(pos);
-
+    i = enveLin(indC);
     if (i > indL)
         a_ij = 0;
         return;
     end
 
-    pos = pos + (indL - i);
-
+    pos = enveCol(indC) + (indL - i);
     a_ij = enve(pos);
 end
