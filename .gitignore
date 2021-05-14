@@ -1,6 +1,7 @@
-c/*.o
-c/*.m
-c/*.mat
-c/envelope
+c/*/*.o
+
+c/test/*.m
+c/test/*.mat
+c/test/envelope
 
 __pycache__
