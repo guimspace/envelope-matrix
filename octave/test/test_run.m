@@ -13,7 +13,7 @@ enveTriU = envelopeBuild(triu(A));
 
 uA = envelopeUnwrap(enveTriL)';
 uA = uA + envelopeUnwrap(enveTriU) - diag(uA) .* eye(n);
-A - uA
+sum(sum(A - uA))
 
 [L, U] = envelopeLuDecomposition(enveTriL, enveTriU);
 
