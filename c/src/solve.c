@@ -23,6 +23,31 @@
 #include "utils.h"
 #include "solve.h"
 
+float sum_lki_ukj(env triL, int indI, env triU, int indJ)
+{
+        float summ = 0;
+
+        int pL = triL->enveCol[indI];
+        int nL = triL->enveCol[indI + 1];
+
+        int pU = triU->enveCol[indJ];
+        int nU = triU->enveCol[indJ + 1];
+
+        if (triL->enveLin[indI] >= triU->enveLin[indJ])
+                pU += triL->enveLin[indI] - triU->enveLin[indJ];
+        else
+                pL += triU->enveLin[indJ] - triL->enveLin[indI];
+
+        while (pL < nL && pU < nU) {
+                summ += triL->enve[pL] * triU->enve[pU];
+
+                pL++;
+                pU++;
+        }
+
+        return summ;
+}
+
 void lu_decomposition(env triL, env triU)
 {
         if (triU->diagg[0] == 0) {
