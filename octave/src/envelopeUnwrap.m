@@ -33,10 +33,12 @@ function A = envelopeUnwrap (envelope)
     A_n = size(diagg)(2);
     A = zeros(A_n);
 
-    j = 1;
+    A(1, 1) = diagg(1);
+
+    j = 2;
     l = enveLin(j);
-    pos = enveCol(1);
-    n = enveCol(2);
+    pos = enveCol(2);
+    n = enveCol(3);
     while (j < A_n)
         if (pos ~= n)
             A(l, j) = enve(pos);
