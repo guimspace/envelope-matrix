@@ -34,18 +34,20 @@ function A = envelopeUnwrap (envelope)
     A = zeros(A_n);
 
     j = 1;
+    l = enveLin(j);
     pos = enveCol(1);
     n = enveCol(2);
     while (j < A_n)
         if (pos ~= n)
-            l = enveLin(j);
             A(l, j) = enve(pos);
 
             pos = pos + 1;
+            l = l + 1;
         else
             A(j, j) = diagg(j);
 
             j = j + 1;
+            l = enveLin(j);
             n = enveCol(j + 1);
         end
     end
