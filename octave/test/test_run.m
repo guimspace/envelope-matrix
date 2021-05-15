@@ -3,7 +3,7 @@ addpath('../src/envelopeLuDecomposition');
 
 clear all
 
-load A.mat
+load A.mat;
 load b.mat;
 
 n = size(A)(2);
