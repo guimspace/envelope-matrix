@@ -15,7 +15,9 @@ uA = envelopeUnwrap(enveTriL)';
 uA = uA + envelopeUnwrap(enveTriU) - diag(uA) .* eye(n);
 sum(sum(A - uA))
 
+[t, u, s] = cputime();
 [L, U] = envelopeLuDecomposition(enveTriL, enveTriU);
+cputime() - [t, u, s]
 
 y = envelopeForwardSubstitution(L, b);
 x = envelopeBackwardSubstitution(U, y);
