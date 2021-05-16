@@ -52,6 +52,8 @@ def generateEnvelope(matrix, isLine):
         j = j + 1
         i = 0
 
+    ENVcol.append(p)
+
     return {
         'diagg': Diagg,
         'enve': envelope,
