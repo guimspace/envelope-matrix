@@ -37,7 +37,6 @@ def envMatrix(matrix):
         ENVcol.append(p)
         while(i != j): #print the numbers before the diagonal
             envelope.append(matrix[i][j])
-            print(f'{matrix[i][j]}\t', end = "")
             ENVlin.append(i)
             p = p + 1
             i = i + 1
