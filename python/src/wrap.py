@@ -41,12 +41,12 @@ def generateEnvelope(matrix, isLine):
             while(i < j and matrix[i][j] == 0):  #skips 0 before an whole number
                 i = i + 1
         ENVcol.append(p)
+        ENVlin.append(i)
         while(i != j): #print the numbers before the diagonal
             if isLine:
                 envelope.append(matrix[j][i])
             else:
                 envelope.append(matrix[i][j])
-            ENVlin.append(i)
             p = p + 1
             i = i + 1
         j = j + 1
