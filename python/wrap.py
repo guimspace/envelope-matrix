@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def envMatrix(matrix):
+def generateEnvelope(matrix):
     ENVcol = []
     envelope = []
     ENVlin = []
