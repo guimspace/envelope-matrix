@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def generateEnvelope(matrix):
+def generateEnvelope(matrix, isLine):
     ENVcol = []
     envelope = []
     ENVlin = []
@@ -32,11 +32,18 @@ def generateEnvelope(matrix):
 
     while(j < n):
         Diagg.append(matrix[j][j])
-        while(i < j and matrix[i][j] == 0):  #skips 0 before an whole number
-            i = i + 1
+        if isLine:
+            while(i < j and matrix[j][i] == 0):  #skips 0 before an whole number
+                i = i + 1
+        else:
+            while(i < j and matrix[i][j] == 0):  #skips 0 before an whole number
+                i = i + 1
         ENVcol.append(p)
         while(i != j): #print the numbers before the diagonal
-            envelope.append(matrix[i][j])
+            if isLine:
+                envelope.append(matrix[j][i])
+            else:
+                envelope.append(matrix[i][j])
             ENVlin.append(i)
             p = p + 1
             i = i + 1
