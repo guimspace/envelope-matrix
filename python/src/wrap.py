@@ -26,6 +26,8 @@ def generateEnvelope(matrix, isLine):
     ENVlin = []
     Diagg = []
 
+    n = len(matrix)
+
     p = 0
     i = 0
     j = 0
