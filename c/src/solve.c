@@ -38,12 +38,12 @@ float sum_lki_ukj(env triL, int indI, env triU, int indJ)
         else
                 pL += triU->enveLin[indJ] - triL->enveLin[indI];
 
-        while (pL < nL && pU < nU) {
-                summ += triL->enve[pL] * triU->enve[pU];
+        int d = nL - pL;
+        if (d > nU - pU)
+                d = nU - pU;
 
-                pL++;
-                pU++;
-        }
+        for (int i = 0; i < d; i++)
+                summ += triL->enve[pL + i] * triU->enve[pU + i];
 
         return summ;
 }
