@@ -23,4 +23,4 @@ y = envelopeForwardSubstitution(L, b);
 x = envelopeBackwardSubstitution(U, y);
 
 x_ = A \ b;
-norm(x_ - x) / norm(x)
+norm(x_ - x) / norm(x_)
