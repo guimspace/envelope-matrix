@@ -61,14 +61,31 @@ int main(int argc, char *argv[])
 
 void load_matrix(char *file_A, char *file_b)
 {
-        int n = 0;
-        scanf("%d", &n);
-        int n_2 = n * n;
-
-        int i;
+        int n, n_2, i;
+        float t;
         char c;
 
         FILE *file_object = NULL;
+
+        file_object = fopen(file_b, "r");
+        if (file_object == NULL) {
+                printf("File could not be opened\n");
+                return;
+        }
+
+        n = 0;
+        while (!feof(file_object)) {
+                fscanf(file_object, "%f%c", &t, &c);
+                n++;
+        }
+
+        n--;
+        n_2 = n * n;
+        rewind(file_object);
+
+        b = (float*)calloc(n, sizeof(float));
+        for (i = 0; i < n; i++)
+                fscanf(file_object, "%f%c", &b[i], &c);
 
         file_object = fopen(file_A, "r");
         if (file_object == NULL) {
@@ -83,14 +100,4 @@ void load_matrix(char *file_A, char *file_b)
         for (i = 0; i < n_2; i++)
                 fscanf(file_object, "%f%c", &matrix[i], &c);
         matrix--;
-
-        file_object = fopen(file_b, "r");
-        if (file_object == NULL) {
-                printf("File could not be opened\n");
-                return;
-        }
-
-        b = (float*)calloc(n, sizeof(float));
-        for (i = 0; i < n; i++)
-                fscanf(file_object, "%f%c", &b[i], &c);
 }
