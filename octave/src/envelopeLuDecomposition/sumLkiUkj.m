@@ -28,8 +28,6 @@
  % @return  {Scalar}        summ        The sum of products.
  %%
 function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
-    summ = 0;
-
     posL = enveTriL{3}(indI);
     nL = enveTriL{3}(indI + 1);
 
@@ -42,10 +40,9 @@ function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
         posL = posL + (enveTriU{4}(indJ) - enveTriL{4}(indI));
     end
 
-    while (posL < nL && posU < nU)
-        summ = summ + enveTriL{2}(posL) * enveTriU{2}(posU);
+    d = min(nL - posL, nU - posU);
+    v1 = enveTriL{2}(posL:(posL + d));
+    v2 = enveTriU{2}(posU:(posU + d));
 
-        posL = posL + 1;
-        posU = posU + 1;
-    end
+    summ = dot(v1, v2);
 end
