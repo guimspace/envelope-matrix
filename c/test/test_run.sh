@@ -9,4 +9,4 @@ echo "$(tail -n +6 x.mat)" > x.mat
 sed -i "s/^ //g" A.mat b.mat x.mat
 
 make
-time ./envelope A.mat b.mat
+time ./envelope A.mat b.mat x.mat

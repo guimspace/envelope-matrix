@@ -8,4 +8,4 @@ echo "$(tail -n +6 x.mat)" > x.mat
 
 sed -i "s/^ //g" A.mat b.mat x.mat
 
-time python test.py A.mat b.mat
+time python test.py A.mat b.mat x.mat
