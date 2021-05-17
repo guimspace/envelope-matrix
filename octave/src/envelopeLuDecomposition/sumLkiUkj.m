@@ -41,8 +41,13 @@ function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
     end
 
     d = min(nL - posL, nU - posU);
-    v1 = enveTriL{2}(posL:(posL + d));
-    v2 = enveTriU{2}(posU:(posU + d));
+    if d == 0
+        summ = 0;
+        return
+    end
+
+    v1 = enveTriL{2}(posL:(posL + d - 1));
+    v2 = enveTriU{2}(posU:(posU + d - 1));
 
     summ = dot(v1, v2);
 end
