@@ -7,13 +7,11 @@ import utils
 import wrap
 import solve
 
-matrix = []
-b = []
-
 def loadMatrix(file_A, file_b):
     with open(file_A) as file_object:
         lines = file_object.readlines()
 
+    matrix = []
     for line in lines:
         if line == "":
             break
@@ -24,6 +22,7 @@ def loadMatrix(file_A, file_b):
     with open(file_b) as file_object:
         lines = file_object.readlines()
 
+    b = []
     for num in lines:
         if num == "":
             break
