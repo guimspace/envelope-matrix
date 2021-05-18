@@ -20,8 +20,61 @@
  * SOFTWARE.
  */
 
+#include <math.h>
+
 #include "utils.h"
 #include "solve.h"
+
+void cholesky_decomposition(env triU)
+{
+        int i, j;
+        int n, n_1, l, p;
+        float summ, u_ii;
+
+        n = triU->n;
+        n_1 = n - 1;
+
+        if (triU->diagg[0] <= 0) {
+                printf("Factorization impossible\n");
+                return;
+        }
+
+        triU->diagg[0] = sqrtf(triU->diagg[0]);
+
+        for (j = 1; j < n; j++) {
+                if (triU->enveLin[j] != 0)
+                        continue;
+
+                p = triU->enveCol[j];
+                if (p < triU->enveCol[j + 1])
+                        triU->enve[p] /= triU->diagg[0];
+        }
+
+        for (i = 1; i < n_1; i++) {
+                summ = triU->diagg[i] - sum_lki_ukj(triU, i, triU, i);
+                if (summ <= 0) {
+                        printf("Factorization impossible\n");
+                        return;
+                }
+
+                triU->diagg[i] = sqrtf(summ);
+
+                for (j = i + 1; j < n; j++) {
+                        l = triU->enveLin[j];
+                        p = triU->enveCol[j] + i - l;
+                        if (l <= i && p < triU->enveCol[j + 1]) {
+                                summ = sum_lki_ukj(triU, j, triU, i);
+                                triU->enve[p] = (triU->enve[p] - summ) / triU->diagg[i];
+                        }
+                }
+        }
+
+        summ = triU->diagg[n_1] - sum_lki_ukj(triU, n_1, triU, n_1);
+        if (summ <= 0)
+                printf("Factorization impossible\n");
+        else
+                triU->diagg[n_1] = sqrtf(summ);
+}
 
 float sum_lki_ukj(env triL, int indI, env triU, int indJ)
 {
