@@ -5,6 +5,7 @@
 #include "../src/utils.h"
 #include "../src/wrap.h"
 #include "../src/solve.h"
+#include "../src/operation.h"
 
 float *matrix, *b, *x_;
 
@@ -41,6 +42,10 @@ int main(int argc, char *argv[])
 
         lu_decomposition(triL, triU);
 
+        float *product = multiply_triangles(triL, triU);
+
+        evaluate_matrices(matrix, product);
+
         float *y = solve_forward_substitution(triL, b);
         float *x = solve_backward_substitution(triU, y);
 
@@ -48,6 +53,7 @@ int main(int argc, char *argv[])
 
         end_envelope(triL);
         end_envelope(triU);
+        free(product);
         free(y);
         free(x);
 
