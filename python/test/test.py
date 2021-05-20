@@ -7,6 +7,42 @@ import utils
 import wrap
 import solve
 
+def evaluateMatrices(matrix, approx):
+    n = len(matrix)
+    n2 = n * n
+
+    p = 0
+    r = 0
+
+    mP = 0
+    mR = 0
+
+    i = 0
+    j = 0
+    while i < n:
+        t = abs(matrix[i][j] - approx[i][j])
+        if r < t:
+            r = t
+
+        t = abs(matrix[i][j])
+        if p < t:
+            p = t
+
+        j = j + 1
+        if j % n == 0:
+            if mP < p:
+                mP = p
+            if mR < r:
+                mR = r
+
+            r = 0
+            p = 0
+
+            j = 0
+            i = i + 1
+
+    print(mR / mP)
+
 def evaluateSolution(x_, x):
     x = [abs(a - b) for a, b in zip(x_, x)]
     x_ = [abs(e) for e in x_]
@@ -78,16 +114,7 @@ def main():
     wrap.unwrapEnvelope(triL, regen, True)
     wrap.unwrapEnvelope(triU, regen, False)
 
-    i = 0
-    j = 0
-    while i < n:
-        if regen[i][j] != matrix[i][j]:
-            print(f"{matrix[i][j]} != {regen[i][j]}")
-
-        j = j + 1
-        if j == n:
-            i = i + 1
-            j = 0
+    evaluateMatrices(matrix, regen)
 
     solve.luDecomposition(triL, triU)
 

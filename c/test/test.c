@@ -10,6 +10,7 @@ float *matrix, *b, *x_;
 
 void load_matrix(char *file_A, char *file_b, char *file_x);
 void evaluate_solution(float x[], int n);
+void evaluate_matrices(float *matrix, float *approx);
 
 int main(int argc, char *argv[])
 {
@@ -36,15 +37,7 @@ int main(int argc, char *argv[])
         unwrap_envelope(triL, regen, true);
         unwrap_envelope(triU, regen, false);
 
-        regen++;
-        matrix++;
-
-        for (i = 0; i < n_2; i++) {
-                if (matrix[i] != regen[i])
-                        printf("%.2f != %.2f\n", matrix[i], regen[i]);
-        }
-
-        matrix--;
+        evaluate_matrices(matrix, regen);
 
         lu_decomposition(triL, triU);
 
@@ -59,6 +52,49 @@ int main(int argc, char *argv[])
         free(x);
 
 	return 0;
+}
+
+void evaluate_matrices(float *matrix, float *approx)
+{
+        int n = matrix[0];
+        int n2 = n * n;
+
+        float p = 0;
+        float r = 0;
+        float t;
+
+        float mP = 0;
+        float mR = 0;
+
+        matrix++;
+        approx++;
+
+        int i = 0;
+        while (i < n2) {
+                t = fabsf(matrix[i] - approx[i]);
+                if (r < t)
+                        r = t;
+
+                t = fabsf(matrix[i]);
+                if (p < t)
+                        p = t;
+
+                i++;
+                if (i % n == 0) {
+                        if (mP < p)
+                                mP = p;
+                        if (mR < r)
+                                mR = r;
+
+                        r = 0;
+                        p = 0;
+                }
+        }
+
+        matrix--;
+        approx--;
+
+        printf("%.2f\n", mR / mP);
 }
 
 void evaluate_solution(float x[], int n)
