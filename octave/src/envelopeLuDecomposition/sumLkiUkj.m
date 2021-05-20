@@ -29,10 +29,7 @@
  %%
 function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
     posL = enveTriL{3}(indI);
-    nL = enveTriL{3}(indI + 1);
-
     posU = enveTriU{3}(indJ);
-    nU = enveTriU{3}(indJ + 1);
 
     if (enveTriL{4}(indI) >= enveTriU{4}(indJ))
         posU = posU + (enveTriL{4}(indI) - enveTriU{4}(indJ));
@@ -40,7 +37,7 @@ function summ = sumLkiUkj (enveTriL, indI, enveTriU, indJ)
         posL = posL + (enveTriU{4}(indJ) - enveTriL{4}(indI));
     end
 
-    d = min(nL - posL, nU - posU);
+    d = min(enveTriL{3}(indI + 1) - posL, enveTriU{3}(indJ + 1) - posU);
     if d == 0
         summ = 0;
         return

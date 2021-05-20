@@ -70,19 +70,16 @@ def luDecomposition(triL, triU):
 
 def sumLkiUkj(triL, indI, triU, indJ):
     pL = triL['enveCol'][indI]
-    nL = triL['enveCol'][indI + 1]
-
     pU = triU['enveCol'][indJ]
-    nU = triU['enveCol'][indJ + 1]
 
     if triL['enveLin'][indI] >= triU['enveLin'][indJ]:
         pU = pU + triL['enveLin'][indI] - triU['enveLin'][indJ]
     else:
         pL = pL + triU['enveLin'][indJ] - triL['enveLin'][indI]
 
-    d = nL - pL
-    if d > nU - pU:
-        d = nU - pU
+    d = triL['enveCol'][indI + 1] - pL
+    if d > triU['enveCol'][indJ + 1] - pU:
+        d = triU['enveCol'][indJ + 1] - pU
 
     v1 = triL['enve'][pL:(pL + d)]
     v2 = triU['enve'][pU:(pU + d)]
