@@ -108,7 +108,7 @@ void build_envelope(env envelope, float *matrix, bool isLine)
                 j++;
         }
 
-        enve[p] = -1;
+        enve[p] = 0;
 
         enve = realloc(enve, (1 + p) * sizeof(float));
 
