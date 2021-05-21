@@ -37,23 +37,39 @@ float *multiply_triangles(env triL, env triU)
 
         i = 0;
         while (i < n) {
-                for (j = triL->enveLin[i]; j < n; j++) {
-                        if (triU->enveLin[j] > i)
+                j = triL->enveLin[i];
+
+                while (j < i) {
+                        summ = sum_lki_ukj(triL, i, triU, j);
+
+                        if (triL->enveLin[i] <= j) {
+                                pL = triL->enveCol[i] + j - triL->enveLin[i];
+                                summ += triL->enve[pL] * triU->diagg[j];
+                        }
+
+                        matrix[j] = summ;
+                        j++;
+                }
+
+                if (triU->enveLin[j] <= i)
+                        matrix[j] = sum_lki_ukj(triL, i, triU, i) + triL->diagg[i] * triU->diagg[i];
+                j++;
+
+                while (j < n) {
+                        if (triU->enveLin[j] > i) {
+                                j++;
                                 continue;
+                        }
 
                         summ = sum_lki_ukj(triL, i, triU, j);
 
-                        if (j < i && triL->enveLin[i] <= j) {
-                                pL = triL->enveCol[i] + j - triL->enveLin[i];
-                                summ += triL->enve[pL] * triU->diagg[j];
-                        } else if (j == i) {
-                                summ += triL->diagg[i] * triU->diagg[i];
-                        } else if (triU->enveLin[j] <= i) {
+                        if (triU->enveLin[j] <= i) {
                                 pU = triU->enveCol[j] + i - triU->enveLin[j];
                                 summ += triL->diagg[i] * triU->enve[pU];
                         }
 
                         matrix[j] = summ;
+                        j++;
                 }
 
                 matrix += n;
