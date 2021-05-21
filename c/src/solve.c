@@ -83,17 +83,15 @@ void lu_decomposition(env triL, env triU)
                 triU->diagg[i] = u_ii;
 
                 for (j = i + 1; j < n; j++) {
-                        p = triU->enveCol[j];
                         l = triU->enveLin[j];
-                        p += i - l;
+                        p = triU->enveCol[j] + i - l;
                         if (l <= i && p < triU->enveCol[j + 1]) {
                                 summ = sum_lki_ukj(triL, i, triU, j);
                                 triU->enve[p] -= summ;
                         }
 
-                        p = triL->enveCol[j];
                         l = triL->enveLin[j];
-                        p += i - l;
+                        p = triL->enveCol[j] + i - l;
                         if (l <= i && p < triL->enveCol[j + 1]) {
                                 summ = sum_lki_ukj(triU, i, triL, j);
                                 triL->enve[p] = (triL->enve[p] - summ) / u_ii;
