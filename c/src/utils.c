@@ -42,24 +42,22 @@ float get_element(env envelope, int indL, int indC)
 
 void print_envelope(env envelope)
 {
+        int n = envelope->n;
         int i;
 
-        for (i = 0; i < envelope->n; i++)
+        for (i = 0; i < n; i++)
                 printf("%.2f\t", envelope->diagg[i]);
         printf("\n");
 
-        i = -1;
-        do {
-                i++;
+        for (i = 0; i <= envelope->enveCol[n]; i++)
                 printf("%.2f\t", envelope->enve[i]);
-        } while (envelope->enve[i] != -1);
         printf("\n");
 
-        for (i = 0; i <= envelope->n; i++)
+        for (i = 0; i <= n; i++)
                 printf("%d\t", envelope->enveCol[i]);
         printf("\n");
 
-        for (i = 0; i < envelope->n; i++)
+        for (i = 0; i < n; i++)
                 printf("%d\t", envelope->enveLin[i]);
         printf("\n");
 }
