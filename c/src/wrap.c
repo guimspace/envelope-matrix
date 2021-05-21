@@ -23,6 +23,45 @@
 #include "utils.h"
 #include "wrap.h"
 
+void unwrap_symmetric_envelope(env envelope, float *matrix)
+{
+        float *diagg = envelope->diagg;
+        float *enve = envelope->enve;
+        int *enveCol = envelope->enveCol;
+        int *enveLin = envelope->enveLin;
+
+        int n = envelope->n;
+        matrix[0] = n;
+        matrix++;
+
+        int top, l, p;
+
+        l = enveLin[0];
+        p = 0;
+        top = enveCol[2];
+
+        matrix[0] = diagg[0];
+
+        int j = 1;
+        while (j < n) {
+                if (p < top) {
+                        matrix[l * n + j] = enve[p];
+                        matrix[j * n + l] = enve[p];
+
+                        l++;
+                        p++;
+                } else {
+                        matrix[j * n + j] = diagg[j];
+
+                        j++;
+                        l = enveLin[j];
+                        top = enveCol[j + 1];
+                }
+        }
+
+        matrix--;
+}
+
 void unwrap_envelope(env envelope, float *matrix, bool isLine)
 {
         float *diagg = envelope->diagg;

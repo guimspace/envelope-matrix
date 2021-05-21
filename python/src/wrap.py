@@ -21,6 +21,20 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #   SOFTWARE.
 
+def unwrapSymmetricEnvelope(envelope, matrix):
+    n = len(envelope['diagg'])
+
+    p = 0
+    for i in range(n):
+        matrix[i][i] = envelope['diagg'][i]
+
+        d = envelope['enveLin'][i] - p
+        top = envelope['enveCol'][i + 1]
+        while p < top:
+            matrix[i][d + p] = envelope['enve'][p]
+            matrix[d + p][i] = envelope['enve'][p]
+            p = p + 1
+
 def unwrapEnvelope(envelope, matrix, isLine = False):
     n = len(envelope['diagg'])
 
