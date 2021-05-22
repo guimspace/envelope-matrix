@@ -69,6 +69,7 @@ def generateEnvelope(matrix, isLine):
         j = j + 1
         i = 0
 
+    envelope.append(0)
     ENVcol.append(p)
 
     return {
