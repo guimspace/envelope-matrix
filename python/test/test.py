@@ -109,10 +109,10 @@ def main():
         regen.append([0] * n)
 
     triL = wrap.generateEnvelope(matrix, True)
-    triU = wrap.generateEnvelope(matrix, False)
+    triU = wrap.generateEnvelope(matrix)
 
     wrap.unwrapEnvelope(triL, regen, True)
-    wrap.unwrapEnvelope(triU, regen, False)
+    wrap.unwrapEnvelope(triU, regen)
 
     evaluateMatrices(matrix, regen)
 

@@ -21,7 +21,7 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #   SOFTWARE.
 
-def unwrapEnvelope(envelope, matrix, isLine):
+def unwrapEnvelope(envelope, matrix, isLine = False):
     n = len(envelope['diagg'])
 
     p = 0
@@ -37,7 +37,7 @@ def unwrapEnvelope(envelope, matrix, isLine):
                 matrix[d + p][i] = envelope['enve'][p]
             p = p + 1
 
-def generateEnvelope(matrix, isLine):
+def generateEnvelope(matrix, isLine = False):
     ENVcol = []
     envelope = []
     ENVlin = []
