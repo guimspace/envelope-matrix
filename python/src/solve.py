@@ -48,16 +48,14 @@ def luDecomposition(triL, triU):
         triU['diagg'][i] = u_ii
 
         for j in range(i + 1, n):
-            p = triU['enveCol'][j]
             l = triU['enveLin'][j]
-            p = p + i - l
+            p = triU['enveCol'][j] + i - l
             if l <= i and p < triU['enveCol'][j + 1]:
                 summ = sumLkiUkj(triL, i, triU, j)
                 triU['enve'][p] = triU['enve'][p] - summ
 
-            p = triL['enveCol'][j]
             l = triL['enveLin'][j]
-            p = p + i - l
+            p = triL['enveCol'][j] + i - l
             if l <= i and p < triL['enveCol'][j + 1]:
                 summ = sumLkiUkj(triU, i, triL, j)
                 triL['enve'][p] = (triL['enve'][p] - summ) / u_ii
