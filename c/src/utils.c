@@ -74,9 +74,7 @@ void end_envelope(env envelope)
 
 env init_envelope(int n)
 {
-        int i;
         int s = n * (n - 1) / 2;
-
         env envelope = malloc( sizeof(strEnvelope) );
 
         envelope->n = n;
