@@ -1,12 +1,11 @@
 class Envelope:
 
-    def initEnvelope(self):
-        return {
-            'diagg': [],
-            'enve': [],
-            'enveCol': [],
-            'enveLin': []
-        }
+    def __init__(self):
+        self.diagg = []
+        self.enve =[]
+        self.enveCol = []
+        self.enveLin = []
+    
         
     def luDecomposition(self, triL, triU):
         if triU['diagg'][0] == 0:
