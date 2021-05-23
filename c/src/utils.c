@@ -72,6 +72,24 @@ void end_envelope(env envelope)
         free(envelope);
 }
 
+env init_eye_envelope(int n, float c)
+{
+        env envelope = malloc( sizeof(strEnvelope) );
+
+        envelope->n = n;
+        envelope->diagg = (float *)calloc(n, sizeof(float));
+        envelope->enve = (float *)calloc(1, sizeof(float));
+        envelope->enveCol = (int *)calloc(1 + n, sizeof(int));
+        envelope->enveLin = (int *)calloc(n, sizeof(int));
+
+        for (int i = 0; i < n; i++) {
+                envelope->diagg[i] = c;
+                envelope->enveLin[i] = i;
+        }
+
+        return envelope;
+}
+
 env init_envelope(int n)
 {
         int s = n * (n - 1) / 2;

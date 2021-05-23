@@ -34,6 +34,13 @@ def getElement(envelope, i, j):
 
     return envelope['enve'][p]
 
+def initEyeEnvelope(n, c):
+    return {
+        'diagg': [c] * n,
+        'enve': [0],
+        'enveCol': [0] * (1 + n),
+        'enveLin': list(range(n))
+    }
 
 def initEnvelope():
     return {
