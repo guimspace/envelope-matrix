@@ -116,6 +116,15 @@ def main():
 
     evaluateMatrices(matrix, regen)
 
+    symmetric = []
+    for i in range(n):
+        symmetric.append([0] * n)
+
+    wrap.unwrapEnvelope(triU, regen, True)
+    wrap.unwrapSymmetricEnvelope(triU, symmetric)
+
+    evaluateMatrices(symmetric, regen)
+
     solve.luDecomposition(triL, triU)
 
     y = solve.solveForwardSubstitution(triL, b)

@@ -39,6 +39,13 @@ int main(int argc, char *argv[])
 
         evaluate_matrices(matrix, regen);
 
+        float *symmetric = (float*)calloc(1 + n * n, sizeof(float));
+
+        unwrap_envelope(triU, regen, true);
+        unwrap_symmetric_envelope(triU, symmetric);
+
+        evaluate_matrices(symmetric, regen);
+
         lu_decomposition(triL, triU);
 
         float *y = solve_forward_substitution(triL, b);
@@ -48,6 +55,7 @@ int main(int argc, char *argv[])
 
         end_envelope(triL);
         end_envelope(triU);
+        free(symmetric);
         free(y);
         free(x);
 
