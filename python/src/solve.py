@@ -18,6 +18,26 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #   SOFTWARE.
 
+def scalarMultiplication(enve, m):
+    envelope = enve['enve']
+    n = len(envelope)
+    p = 0
+
+    if m != 0:
+        while(p < n):
+            envelope[p] = envelope[p] * m
+            p = p + 1
+    else:
+        enve['enve'] = [0]
+
+    p = 0
+    diagonal = enve['diagg']
+    n = len(diagonal)
+
+    while(p < n):
+        diagonal[p] = diagonal[p] * m
+        p = p + 1
+
 def luDecomposition(triL, triU):
     if triU['diagg'][0] == 0:
         print("Factorization impossible")
