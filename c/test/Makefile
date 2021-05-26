@@ -2,7 +2,8 @@ CC = gcc
 DEPS = ./test.o \
 				../src/utils.o \
 				../src/wrap.o \
-				../src/solve.o
+				../src/solve.o \
+				../src/operation.o
 TARGET = envelope
 
 

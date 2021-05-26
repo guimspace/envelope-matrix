@@ -6,6 +6,7 @@ sys.path.append("../src")
 import utils
 import wrap
 import solve
+import operation
 
 def evaluateMatrices(matrix, approx):
     n = len(matrix)
@@ -126,6 +127,10 @@ def main():
     evaluateMatrices(symmetric, regen)
 
     solve.luDecomposition(triL, triU)
+
+    product = operation.multiplyTriangles(triL, triU)
+
+    evaluateMatrices(matrix, product)
 
     y = solve.solveForwardSubstitution(triL, b)
     x = solve.solveBackwardSubstitution(triU, y)
