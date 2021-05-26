@@ -8,7 +8,7 @@ TARGET = envelope
 
 
 $(TARGET): $(DEPS)
-	$(CC) $(DEPS) -o $(TARGET)
+	$(CC) $(DEPS) -o $(TARGET) -lm
 
 all:
 	$(TARGET)

@@ -58,6 +58,18 @@ int main(int argc, char *argv[])
 
         evaluate_solution(x, n);
 
+        end_envelope(triU);
+        free(product);
+
+        triU = init_envelope(n);
+        build_envelope(triU, matrix, false);
+
+        cholesky_decomposition(triU);
+
+        product = multiply_triangles(triU, triU);
+
+        evaluate_matrices(matrix, product);
+
         end_envelope(triL);
         end_envelope(triU);
         free(symmetric);

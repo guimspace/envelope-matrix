@@ -137,5 +137,12 @@ def main():
 
     evaluateSolution(x_, x)
 
+    triU = wrap.generateEnvelope(matrix)
+
+    solve.choleskyDecomposition(triU)
+
+    product = operation.multiplyTriangles(triU, triU)
+    evaluateMatrices(matrix, product)
+
 if __name__ == "__main__":
     main()

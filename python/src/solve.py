@@ -18,6 +18,47 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #   SOFTWARE.
 
+import math
+
+def choleskyDecomposition(triU):
+    n = len(triU['diagg'])
+
+    if triU['diagg'][0] <= 0:
+        print("Factorization impossible")
+        return
+
+    triU['diagg'][0] = math.sqrt(triU['diagg'][0])
+
+    for j in range(1, n):
+        if triU['enveLin'][j] != 0:
+            continue
+
+        p = triU['enveCol'][j]
+        if (p < triU['enveCol'][j + 1]):
+            triU['enve'][p] = triU['enve'][p] / triU['diagg'][0]
+
+    n_1 = n - 1
+    for i in range(1, n_1):
+        summ = triU['diagg'][i] - sumLkiUkj(triU, i, triU, i)
+        if summ <= 0:
+            print("Factorization impossible")
+            return
+
+        triU['diagg'][i] = math.sqrt(summ)
+
+        for j in range(i + 1, n):
+            l = triU['enveLin'][j]
+            p = triU['enveCol'][j] + i - l
+            if l <= i and p < triU['enveCol'][j + 1]:
+                summ = sumLkiUkj(triU, j, triU, i)
+                triU['enve'][p] = (triU['enve'][p] - summ) / triU['diagg'][i]
+
+    summ = triU['diagg'][n_1] - sumLkiUkj(triU, n_1, triU, n_1)
+    if summ <= 0:
+        print("Factorization impossible")
+    else:
+        triU['diagg'][n_1] = math.sqrt(summ)
+
 def luDecomposition(triL, triU):
     if triU['diagg'][0] == 0:
         print("Factorization impossible")
