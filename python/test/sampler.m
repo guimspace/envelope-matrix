@@ -1,13 +1,12 @@
 clear all
 
-n = 10;
+n = 100;
 A = rand(n);
+A = 0.5 * (A + A');
+A = A * A';
+A = A + n * eye(n);
 
-[L, U, P] = lu(A);
-clear L U
-
-A = P * A;
-b = A * [1:n]';
+b = A * [n:-1:1]';
 x = A \ b;
 
 save A.mat A;
