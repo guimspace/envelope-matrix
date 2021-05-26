@@ -24,6 +24,24 @@
 #include "operation.h"
 #include "solve.h"
 
+void scalar_multiplication(env envelope, float scalar)
+{
+        int n = envelope->n;
+        int i;
+
+        if (scalar == 0) {
+                end_envelope(envelope);
+                envelope = init_eye_envelope(n, 0);
+                return;
+        }
+
+        for (i = 0; i < n; i++)
+                envelope->diagg[i] *= scalar;
+
+        for (i = 0; i < envelope->enveCol[n]; i++)
+                envelope->enve[i] *= scalar;
+}
+
 float *multiply_triangles(env triL, env triU)
 {
         int d, i, j, k;
