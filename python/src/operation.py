@@ -35,19 +35,13 @@ def scalarMultiplication(enve, m):
             p = p + 1
     else:
         n = len(diagonal)
-        enve['enveCol'] = [0] * (n + 1)
-        enve['enve'] = [0]
-
+        enve = initEyeEnvelope(n, 0)
+        return
 
     p = 0
     n = len(diagonal)
 
-    if m == 0:
-        enve['enveLin'] = []
-
     while(p < n):
-        if m == 0:
-            enve['enveLin'].append(p)
         diagonal[p] = diagonal[p] * m
         p = p + 1
 
