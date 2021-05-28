@@ -73,12 +73,12 @@ def generateEnvelope(matrix, isLine = False):
                 i = i + 1
         ENVcol.append(p)
         ENVlin.append(i)
+        p = p + (j - i)
         while(i != j): #print the numbers before the diagonal
             if isLine:
                 envelope.append(matrix[j][i])
             else:
                 envelope.append(matrix[i][j])
-            p = p + 1
             i = i + 1
         j = j + 1
         i = 0
