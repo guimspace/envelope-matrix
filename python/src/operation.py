@@ -18,6 +18,7 @@
 #   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #   SOFTWARE.
 
+import utils
 import solve
 
 def scalarMultiplication(enve, m):
@@ -35,19 +36,15 @@ def scalarMultiplication(enve, m):
             p = p + 1
     else:
         n = len(diagonal)
-        enve['enveCol'] = [0] * (n + 1)
-        enve['enve'] = [0]
-
+        eye = utils.initEyeEnvelope(n, 0)
+        for k in eye:
+            enve[k] = eye[k]
+        return
 
     p = 0
     n = len(diagonal)
 
-    if m == 0:
-        enve['enveLin'] = []
-
     while(p < n):
-        if m == 0:
-            enve['enveLin'].append(p)
         diagonal[p] = diagonal[p] * m
         p = p + 1
 
